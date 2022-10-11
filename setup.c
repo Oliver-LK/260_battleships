@@ -7,13 +7,13 @@
 
 uint8_t ship_setup() {
 
-    pacer_init(100);
+    bool setup_p = false;
 
-    while (1) {
-
+    while (!setup_p) {
         pacer_wait();
-
-        // put in display function here
+        tinygl_update ();
+        navswitch_update ();
+        display_update();
 
         
     }

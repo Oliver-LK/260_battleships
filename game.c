@@ -5,16 +5,18 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "display.h"
+#include "pacer.h"
+
+#define PACER_FREQ 500
 
 int main (void)
 {
+    /* Initialisation section*/
     display_init();
+    pacer_init(PACER_FREQ);
+    system_init();
+    navswitch_init();
+    tinygl_init(PACER_FREQ);
 
-    display_pixel_set(0, 0, true);
-    display_pixel_set(0, 6, true);
-    display_pixel_set(4, 0, true);
-
-    while (1) {
-        display_update();
-    }
+    ship_setup();
 }
