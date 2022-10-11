@@ -6,7 +6,9 @@
 #include <stdbool.h>
 #include "display.h"
 #include "pacer.h"
-
+#include "button.h"
+#include <stdlib.h>
+#include "setup.h"
 #define PACER_FREQ 500
 
 int main (void)
@@ -16,7 +18,15 @@ int main (void)
     pacer_init(PACER_FREQ);
     system_init();
     navswitch_init();
-    tinygl_init(PACER_FREQ);
+    button_init();
+
+    // uint16_t counter = 0;
+    // display_pixel_set(0, 0, true);
+    // while (counter < 10000) {
+    //     pacer_wait();
+    //     counter++;
+    //     display_update();
+    // }
 
     ship_setup();
 }
