@@ -42,7 +42,7 @@ typedef struct {
 //     uint8_t pos4y;
 // } Ships_t;
 
-void ship_setup(void);
+void ship_setup(Ship_t[4]);
 
 
 
