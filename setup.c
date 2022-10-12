@@ -71,14 +71,17 @@ void ship_setup() {
     ships[2] = length3ship2;
     ships[3] = length2ship;
 
-    bool setupDone = 0;
+    bool setupDone = false;
+    bool takenSpacesMat[5][7] = {0};
+    bool okayPlace = true;
 
     for (size_t i = 0; i < 4; i++) {
-        setupDone = 0;
+        setupDone = false;
         while (!setupDone) {
             pacer_wait();
             navswitch_update();
             button_update();
+            okayPlace = true;
 
             /*Check for rotation*/
             if (navswitch_push_event_p(NAVSWITCH_PUSH)){
@@ -127,28 +130,50 @@ void ship_setup() {
                 }
             }
             if (button_push_event_p(0)) {
-                setupDone = true;
+
+                /*Check for overlaps*/
+                if (ships[i].vertical) {
+                    for (uint8_t j = 0; j < ships[i].length; j++) {
+                        if (takenSpacesMat[ships[i].xcoord][ships[i].ycoord + j] == 1) {
+                            okayPlace = false;
+                        }
+                    }
+                } else {
+                    for (uint8_t j = 0; j < ships[i].length; j++) {
+                        if (takenSpacesMat[ships[i].xcoord + j][ships[i].ycoord] == 1) {
+                            okayPlace = false;
+                        }
+                    }
+                }
+                if (okayPlace) {
+                    for (uint8_t k = 0; k < ships[i].length; k++) {
+                        if (ships[i].vertical) {
+                            takenSpacesMat[ships[i].xcoord][ships[i].ycoord + k] = 1;
+                        } else {
+                            takenSpacesMat[ships[i].xcoord + k][ships[i].ycoord] = 1;
+                        }
+                    }
+                    setupDone = true;
+                }
             }
 
             /*Temporary display function for testing*/
 
             display_clear();
 
-            if (ships[i].vertical) {
-                display_pixel_set(ships[i].xcoord, ships[i].ycoord, true);
-                display_pixel_set(ships[i].xcoord, ships[i].ycoord + 1, true);
-                display_pixel_set(ships[i].xcoord, ships[i].ycoord + 2, true);
-                display_pixel_set(ships[i].xcoord, ships[i].ycoord + 3, true);
-            } else {
-                display_pixel_set(ships[i].xcoord, ships[i].ycoord, true);
-                display_pixel_set(ships[i].xcoord + 1, ships[i].ycoord, true);
-                display_pixel_set(ships[i].xcoord + 2, ships[i].ycoord, true);
-                display_pixel_set(ships[i].xcoord + 3, ships[i].ycoord, true);
+            for (size_t i = 0; i < 4; i++) {
+                if (ships[i].vertical) {
+                    for (uint8_t j = 0; j < ships[i].length; j++) {
+                        display_pixel_set(ships[i].xcoord, ships[i].ycoord + j, true);
+                    }
+                } else {
+                    for (uint8_t j = 0; j < ships[i].length; j++) {
+                        display_pixel_set(ships[i].xcoord + j, ships[i].ycoord, true);
+                    }
+                }
             }
 
-
             display_update();
-
         }
     }
 }
