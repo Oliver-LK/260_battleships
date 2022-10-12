@@ -11,6 +11,8 @@
 #include "setup.h"
 #define PACER_FREQ 500
 
+//test
+
 int main (void)
 {
     /* Initialisation section*/
