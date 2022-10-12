@@ -93,6 +93,7 @@ void ship_setup() {
                     while (ships[i].ycoord + 3 > 6) {
                         ships[i].ycoord--;
                     }
+                    ships[i].vertical = true;
                 }
             }
 
@@ -106,7 +107,7 @@ void ship_setup() {
             }
             if (navswitch_push_event_p (NAVSWITCH_SOUTH)) {
                 if (ships[i].vertical) {
-                    offset = ships[i].length;
+                    offset = ships[i].length - 1;
                 }
                 if (ships[i].ycoord < (6 - offset)) {
                     ships[i].ycoord++;
@@ -114,7 +115,7 @@ void ship_setup() {
             }
             if (navswitch_push_event_p (NAVSWITCH_EAST)) {
                 if (!ships[i].vertical) {
-                    offset = ships[i].length;
+                    offset = ships[i].length - 1;
                 }
                 if (ships[i].xcoord < (4 - offset)) {
                     ships[i].xcoord++;
