@@ -43,7 +43,10 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-setup.o: setup.c setup.h
+setup.o: setup.c setup.h ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+display_ship.o: display_ship.c display_ship.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
@@ -65,7 +68,7 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../driv
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o display.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o setup.o timer.o timer0.o button.o usart1.o font.o prescale.o
+game.out: game.o system.o display.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o setup.o display_ship.o timer.o timer0.o button.o usart1.o font.o prescale.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
