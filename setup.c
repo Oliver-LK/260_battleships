@@ -1,14 +1,20 @@
+//  C Libraries
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+//  Fun kit Libraries
 #include "system.h"
 #include "pio.h"
 #include "timer.h"
 #include "navswitch.h"
-#include <stdint.h>
-#include <stdbool.h>
 #include "display.h"
 #include "pacer.h"
 #include "button.h"
-#include <stdlib.h>
+
+//  Game Libraries
 #include "setup.h"
+#include "ship_mod.h"
 
 
 void ship_setup(Ship_t* ships) {

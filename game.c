@@ -1,14 +1,21 @@
+//  C Libraries
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+//  Fun kit Libraries
 #include "system.h"
 #include "pio.h"
 #include "timer.h"
 #include "navswitch.h"
-#include <stdint.h>
-#include <stdbool.h>
 #include "display.h"
 #include "pacer.h"
 #include "button.h"
-#include <stdlib.h>
+
+//  Game Libraries
 #include "setup.h"
+#include "ship_mod.h"
+
 #define PACER_FREQ 500
 
 /* Initialisation section*/
@@ -32,63 +39,65 @@ int main (void)
     //     counter++;
     //     display_update();
     // }
-    Ship_t length4ship = {
-        .xcoord = 0,
-        .ycoord = 0,
-        .length = 4,
-        .vertical = true,
-        .hits = {
-            .hit1 = false,
-            .hit2 = false,
-            .hit3 = false,
-            .hit4 = false
-        }
-    };
+    // Ship_t length4ship = {
+    //     .xcoord = 0,
+    //     .ycoord = 0,
+    //     .length = 4,
+    //     .vertical = true,
+    //     .hits = {
+    //         .hit1 = false,
+    //         .hit2 = false,
+    //         .hit3 = false,
+    //         .hit4 = false
+    //     }
+    // };
 
-    Ship_t length3ship1 = {
-        .xcoord = 0,
-        .ycoord = 0,
-        .length = 3,
-        .vertical = true,
-        .hits = {
-            .hit1 = false,
-            .hit2 = false,
-            .hit3 = false,
-            .hit4 = false
-        }
-    };
+    // Ship_t length3ship1 = {
+    //     .xcoord = 0,
+    //     .ycoord = 0,
+    //     .length = 3,
+    //     .vertical = true,
+    //     .hits = {
+    //         .hit1 = false,
+    //         .hit2 = false,
+    //         .hit3 = false,
+    //         .hit4 = false
+    //     }
+    // };
 
-    Ship_t length3ship2 = {
-        .xcoord = 0,
-        .ycoord = 0,
-        .length = 3,
-        .vertical = true,
-        .hits = {
-            .hit1 = false,
-            .hit2 = false,
-            .hit3 = false,
-            .hit4 = false
-        }
-    };
+    // Ship_t length3ship2 = {
+    //     .xcoord = 0,
+    //     .ycoord = 0,
+    //     .length = 3,
+    //     .vertical = true,
+    //     .hits = {
+    //         .hit1 = false,
+    //         .hit2 = false,
+    //         .hit3 = false,
+    //         .hit4 = false
+    //     }
+    // };
 
-    Ship_t length2ship = {
-        .xcoord = 0,
-        .ycoord = 0,
-        .length = 2,
-        .vertical = true,
-        .hits = {
-            .hit1 = false,
-            .hit2 = false,
-            .hit3 = false,
-            .hit4 = false
-        }
-    };
+    // Ship_t length2ship = {
+    //     .xcoord = 0,
+    //     .ycoord = 0,
+    //     .length = 2,
+    //     .vertical = true,
+    //     .hits = {
+    //         .hit1 = false,
+    //         .hit2 = false,
+    //         .hit3 = false,
+    //         .hit4 = false
+    //     }
+    // };
 
-    Ship_t ships[4];
-    ships[0] = length4ship;
-    ships[1] = length3ship1;
-    ships[2] = length3ship2;
-    ships[3] = length2ship;
+    // Ship_t ships[4];
+    // ships[0] = length4ship;
+    // ships[1] = length3ship1;
+    // ships[2] = length3ship2;
+    // ships[3] = length2ship;
+
+    Ship_t* ships = ship_init();
 
     ship_setup(&ships);
 
