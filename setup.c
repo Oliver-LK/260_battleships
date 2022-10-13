@@ -11,7 +11,7 @@
 #include "setup.h"
 
 
-void ship_setup(Ship_t ships[]) {
+void ship_setup(Ship_t* ships) {
     
     bool setupDone = false;
     bool takenSpacesMat[5][7] = {0};
