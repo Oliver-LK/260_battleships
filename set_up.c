@@ -85,38 +85,32 @@ void rotation(Ship_t* current_ship)
     
 }
 
-// void placement(uint8_t* ship_index)
-// {
-//     if(button_push_event_p(0)) {
-//         pacer_init(5);
-//         led_set (LED1, 1);
-//         pacer_wait ();
-//         led_set (LED1, 0);
-//         *ship_index = *ship_index + 1;
-//     }
-// }
+void placement(uint8_t* ship_index)
+{
+    if(button_push_event_p(0)) {
+        pacer_init(5);
+        led_set (LED1, 1);
+        pacer_wait ();
+        led_set (LED1, 0);
+        *ship_index = *ship_index + 1;
+    }
+}
 
 
 
 void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index)
 {   
-    bool re_position = true;
     
-    while(re_position == true) {
-        translation(current_ship);
-        rotation(current_ship);
-        //placement(ship_index);
-        
-        
-    
-        navswitch_update();
-        button_update();
+    translation(current_ship);
+    rotation(current_ship);
+    placement(ship_index);
 
-        display_ship(current_ship);
-        display_update();
-        display_clear();
+    navswitch_update();
+    button_update();
 
+    display_ship(current_ship);
+    display_update();
+    display_clear();
 
-    }
 }
     

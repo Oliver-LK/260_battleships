@@ -55,24 +55,12 @@ int main (void)
 
     //ship_setup(ships);
     uint8_t ship_index = 0;
+    bool re_position = true;
     ship_placement_phase(ships[ship_index], &ship_index);
-    while(1) {
-        button_update();
-        
-        if(button_push_event_p(0)){
-            pacer_init(5);
-            led_set (LED1, 1);
-            pacer_wait ();
-            led_set (LED1, 0);
-            ship_index++;
-        }
-        
-    }
-    
-    
-    
-
-    while (1) {
-        display_update();
+    while(re_position == true) {
+        ship_placement_phase(ships[ship_index], &ship_index);
+        // for(uint64_t index_ship = 0; index_ship < ship_index; index_ship){
+        //     display_ship(ships[index_ship]);
+        // }
     }
 }
