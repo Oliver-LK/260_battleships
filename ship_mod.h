@@ -19,7 +19,7 @@ typedef struct {
     uint8_t ycoord;
     bool vertical;
     Hits_t hits;
-    // uint8_t hits[length];
+    
 } Ship_t;
 
 Ship_t* ship_init(void);

@@ -1,3 +1,5 @@
+//  To delete all .o files
+//  find . -type f -name '*.o' -delete
 //  C Libraries
 #include <stdint.h>
 #include <stdbool.h>
@@ -11,97 +13,39 @@
 #include "display.h"
 #include "pacer.h"
 #include "button.h"
+#include "led.h"
 
 //  Game Libraries
 #include "setup.h"
 #include "ship_mod.h"
+#include "led_testing.h"
 
 #define PACER_FREQ 500
 
 /* Initialisation section*/
-void inilisation(void)
-{
+void initialisation(void) 
+{ 
     display_init();
     pacer_init(PACER_FREQ);
     system_init();
     navswitch_init();
     button_init();
+    led_init();
+    led_set (LED1, 0);
 
 }
 
 int main (void)
 {
-    inilisation();
-    // uint16_t counter = 0;
-    // display_pixel_set(0, 0, true);
-    // while (counter < 10000) {
-    //     pacer_wait();
-    //     counter++;
-    //     display_update();
-    // }
-    // Ship_t length4ship = {
-    //     .xcoord = 0,
-    //     .ycoord = 0,
-    //     .length = 4,
-    //     .vertical = true,
-    //     .hits = {
-    //         .hit1 = false,
-    //         .hit2 = false,
-    //         .hit3 = false,
-    //         .hit4 = false
-    //     }
-    // };
-
-    // Ship_t length3ship1 = {
-    //     .xcoord = 0,
-    //     .ycoord = 0,
-    //     .length = 3,
-    //     .vertical = true,
-    //     .hits = {
-    //         .hit1 = false,
-    //         .hit2 = false,
-    //         .hit3 = false,
-    //         .hit4 = false
-    //     }
-    // };
-
-    // Ship_t length3ship2 = {
-    //     .xcoord = 0,
-    //     .ycoord = 0,
-    //     .length = 3,
-    //     .vertical = true,
-    //     .hits = {
-    //         .hit1 = false,
-    //         .hit2 = false,
-    //         .hit3 = false,
-    //         .hit4 = false
-    //     }
-    // };
-
-    // Ship_t length2ship = {
-    //     .xcoord = 0,
-    //     .ycoord = 0,
-    //     .length = 2,
-    //     .vertical = true,
-    //     .hits = {
-    //         .hit1 = false,
-    //         .hit2 = false,
-    //         .hit3 = false,
-    //         .hit4 = false
-    //     }
-    // };
-
-    // Ship_t ships[4];
-    // ships[0] = length4ship;
-    // ships[1] = length3ship1;
-    // ships[2] = length3ship2;
-    // ships[3] = length2ship;
+    initialisation();
 
     Ship_t* ships = ship_init();
 
-    ship_setup(&ships);
+
+    // ship_setup(ships);
 
     display_clear();
+
     for (size_t i = 0; i < 4; i++) {
         if (ships[i].vertical) {
             for (uint8_t j = 0; j < ships[i].length; j++) {

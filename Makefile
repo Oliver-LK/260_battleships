@@ -43,10 +43,13 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-setup.o: setup.c setup.h ../../drivers/avr/system.h
-	$(CC) -c $(CFLAGS) $< -o $@
+# setup.o: setup.c setup.h ../../drivers/avr/system.h
+# 	$(CC) -c $(CFLAGS) $< -o $@
 
 ship_mod.o: ship_mod.c ship_mod.h ../../drivers/avr/system.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+led_testing.o: led_testing.c led_testing.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
@@ -61,6 +64,9 @@ usart1.o: ../../drivers/avr/usart1.c ../../drivers/avr/system.h ../../drivers/av
 button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+led.o: ../../drivers/led.c ../../drivers/led.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 font.o: ../../utils/font.c ../../drivers/avr/system.h ../../utils/font.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
@@ -68,7 +74,7 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../driv
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o display.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o setup.o ship_mod.o timer.o timer0.o button.o usart1.o font.o prescale.o
+game.out: game.o system.o display.o led.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o ship_mod.o led_testing.o timer.o timer0.o button.o usart1.o font.o prescale.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

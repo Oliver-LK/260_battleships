@@ -9,6 +9,7 @@
 
 //  Game Libs
 #include "setup.h"
+#include "ship_mod.h"
 
 Ship_t* ship_init(void)
 {
@@ -71,5 +72,7 @@ Ship_t* ship_init(void)
     ships[2] = length3ship2;
     ships[3] = length2ship;
 
-    return &ships;
+    Ship_t* ships_to_return = ships;
+
+    return ships_to_return;
 }
