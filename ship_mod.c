@@ -16,10 +16,15 @@
 
 void display_ship(Ship_t* ship)
 {
-    // display_pixel_set(1, 1, true);
-    display_pixel_set(ship->xcoord, ship->ycoord, true);
-    
+    for(uint8_t ship_index = 0; ship_index < ship->length; ship_index++) {
+        if(ship->vertical == true) {
+                display_pixel_set(ship->xcoord, ship->ycoord + ship_index, true);
+        } else if(ship->vertical == false) {
+            display_pixel_set(ship->xcoord + ship_index, ship->ycoord, true);
+        }
+    }
 }
+
 
 Ship_t battle_ship_init(void) {
     Ship_t battle_ship = {
