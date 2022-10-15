@@ -12,11 +12,14 @@
 #include "pacer.h"
 #include "button.h"
 #include "tinygl.h"
+#include "led.h"
 #include "../fonts/font5x7_1.h"
 
 //  Game Libraries
 #include "set_up.h"
 #include "ship_mod.h"
+
+
 
 void greetings(void)
 {
@@ -82,15 +85,32 @@ void rotation(Ship_t* current_ship)
     
 }
 
-void ship_placement(Ship_t* current_ship)
+// void placement(uint8_t* ship_index)
+// {
+//     if(button_push_event_p(0)) {
+//         pacer_init(5);
+//         led_set (LED1, 1);
+//         pacer_wait ();
+//         led_set (LED1, 0);
+//         *ship_index = *ship_index + 1;
+//     }
+// }
+
+
+
+void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index)
 {   
     bool re_position = true;
     
     while(re_position == true) {
         translation(current_ship);
         rotation(current_ship);
-
+        //placement(ship_index);
+        
+        
+    
         navswitch_update();
+        button_update();
 
         display_ship(current_ship);
         display_update();

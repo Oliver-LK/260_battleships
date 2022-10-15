@@ -37,9 +37,7 @@ void initialisation(void)
     led_set (LED1, 0);
     display_clear();
 
-    bool loop = false;
-    greetings();
-    display_clear();
+    
 
 }
 
@@ -48,16 +46,30 @@ void initialisation(void)
 int main (void)
 {
     initialisation();
+    greetings();
+    display_clear();
+
     //  Ugly code but only way that work without other consequences 
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
 
     //ship_setup(ships);
-    uint8_t ships_to_display = 1;
-    for(uint8_t ship_index = 0; ship_index < ships_to_display; ship_index++) {
-        //display_ship(ships[ship_index]);
-        ship_placement(ships[ship_index]);
+    uint8_t ship_index = 0;
+    ship_placement_phase(ships[ship_index], &ship_index);
+    while(1) {
+        button_update();
+        
+        if(button_push_event_p(0)){
+            pacer_init(5);
+            led_set (LED1, 1);
+            pacer_wait ();
+            led_set (LED1, 0);
+            ship_index++;
+        }
+        
     }
+    
+    
     
 
     while (1) {
