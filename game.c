@@ -36,9 +36,6 @@ void initialisation(void)
 
     led_set (LED1, 0);
     display_clear();
-
-    
-
 }
 
 
@@ -53,14 +50,13 @@ int main (void)
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
 
-    //ship_setup(ships);
     uint8_t ship_index = 0;
     bool re_position = true;
-    ship_placement_phase(ships[ship_index], &ship_index);
     while(re_position == true) {
         ship_placement_phase(ships[ship_index], &ship_index);
-        // for(uint64_t index_ship = 0; index_ship < ship_index; index_ship){
-        //     display_ship(ships[index_ship]);
-        // }
+        for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
+            display_ship(ships[index_ship]);
+        }
+
     }
 }

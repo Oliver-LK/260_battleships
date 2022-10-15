@@ -28,8 +28,8 @@ void display_ship(Ship_t* ship)
 
 Ship_t battle_ship_init(void) {
     Ship_t battle_ship = {
-        .xcoord = 1,
-        .ycoord = 1,
+        .xcoord = 0,
+        .ycoord = 0,
         .length = 4,
         .vertical = true,
         .hits = {
@@ -46,7 +46,7 @@ Ship_t destroyer1_init(void) {
         .xcoord = 0,
         .ycoord = 0,
         .length = 3,
-        .vertical = false,
+        .vertical = true,
         .hits = {
             .hit1 = false,
             .hit2 = false,
@@ -75,10 +75,10 @@ Ship_t destroyer2_init(void) {
 
 Ship_t patrol_boat_init(void) {
     Ship_t patrol_boat = {
-        .xcoord = 2,
-        .ycoord = 4,
+        .xcoord = 0,
+        .ycoord = 0,
         .length = 2,
-        .vertical = false,
+        .vertical = true,
         .hits = {
             .hit1 = false,
             .hit2 = false,
