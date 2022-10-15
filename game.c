@@ -20,11 +20,12 @@
 #include "setup.h"
 #include "ship_mod.h"
 #include "led_testing.h"
+#include "set_up.h"
 
 #define PACER_FREQ 500
 
 /* Initialisation section*/
-void lib_initialisation(void) 
+void initialisation(void) 
 { 
     display_init();
     pacer_init(PACER_FREQ);
@@ -36,35 +37,28 @@ void lib_initialisation(void)
     led_set (LED1, 0);
     display_clear();
 
+    bool loop = false;
+    greetings();
+    display_clear();
+
 }
 
-void ship_init(void)
-{
-    Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
-    Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
 
-    for(uint8_t ship_index = 0; ship_index < TOTAL_SHIPS; ship_index++) {
-        display_ship(ships[ship_index]);
-    }
-}
 
 int main (void)
 {
-    lib_initialisation();
-    ship_init();
-    //  Ugly code but most passing the ship array around caused info to 'disappear'
+    initialisation();
+    //  Ugly code but only way that work without other consequences 
+    Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
+    Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
 
-    // for (size_t i = 0; i < 4; i++) {
-    //     if (ships[i].vertical) {
-    //         for (uint8_t j = 0; j < ships[i].length; j++) {
-    //             display_pixel_set(ships[i].xcoord, ships[i].ycoord + j, true);
-    //         }
-    //     } else {
-    //         for (uint8_t j = 0; j < ships[i].length; j++) {
-    //             display_pixel_set(ships[i].xcoord + j, ships[i].ycoord, true);
-    //         }
-    //     }
-    // }
+    //ship_setup(ships);
+    uint8_t ships_to_display = 1;
+    for(uint8_t ship_index = 0; ship_index < ships_to_display; ship_index++) {
+        //display_ship(ships[ship_index]);
+        ship_placement(ships[ship_index]);
+    }
+    
 
     while (1) {
         display_update();

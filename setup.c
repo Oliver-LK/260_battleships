@@ -109,18 +109,6 @@ void ship_setup(Ship_t* ships) {
 
             display_clear();
 
-            for (size_t i = 0; i < 4; i++) {
-                if (ships[i].vertical) {
-                    for (uint8_t j = 0; j < ships[i].length; j++) {
-                        display_pixel_set(ships[i].xcoord, ships[i].ycoord + j, true);
-                    }
-                } else {
-                    for (uint8_t j = 0; j < ships[i].length; j++) {
-                        display_pixel_set(ships[i].xcoord + j, ships[i].ycoord, true);
-                    }
-                }
-            }
-
             display_update();
         }
     }
