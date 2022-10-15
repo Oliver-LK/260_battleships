@@ -5,16 +5,24 @@
 
 //  Funkit libs
 #include "system.h"
-
+#include "ledmat.h"
+#include "display.h"
+#include "pio.h"
 
 //  Game Libs
 #include "setup.h"
 #include "ship_mod.h"
 
-Ship_t* ship_init(void)
-{
 
-    Ship_t length4ship = {
+void display_ship(Ship_t* ship)
+{
+    // display_pixel_set(1, 1, true);
+    display_pixel_set(ship->xcoord, ship->ycoord, true);
+    
+}
+
+Ship_t battle_ship_init(void) {
+    Ship_t battle_ship = {
         .xcoord = 0,
         .ycoord = 0,
         .length = 4,
@@ -26,10 +34,12 @@ Ship_t* ship_init(void)
             .hit4 = false
         }
     };
-
-    Ship_t length3ship1 = {
-        .xcoord = 0,
-        .ycoord = 0,
+    return battle_ship;
+}
+Ship_t destroyer1_init(void) {
+    Ship_t destroyer1 = {
+        .xcoord = 1,
+        .ycoord = 1,
         .length = 3,
         .vertical = true,
         .hits = {
@@ -39,10 +49,13 @@ Ship_t* ship_init(void)
             .hit4 = false
         }
     };
+    return destroyer1;
+}
 
-    Ship_t length3ship2 = {
-        .xcoord = 0,
-        .ycoord = 0,
+Ship_t destroyer2_init(void) {
+    Ship_t destroyer2 = {
+        .xcoord = 2,
+        .ycoord = 2,
         .length = 3,
         .vertical = true,
         .hits = {
@@ -52,10 +65,13 @@ Ship_t* ship_init(void)
             .hit4 = false
         }
     };
+    return destroyer2;
+}
 
-    Ship_t length2ship = {
-        .xcoord = 0,
-        .ycoord = 0,
+Ship_t patrol_boat_init(void) {
+    Ship_t patrol_boat = {
+        .xcoord = 3,
+        .ycoord = 3,
         .length = 2,
         .vertical = true,
         .hits = {
@@ -65,14 +81,5 @@ Ship_t* ship_init(void)
             .hit4 = false
         }
     };
-
-    Ship_t ships[4];
-    ships[0] = length4ship;
-    ships[1] = length3ship1;
-    ships[2] = length3ship2;
-    ships[3] = length2ship;
-
-    Ship_t* ships_to_return = ships;
-
-    return ships_to_return;
+    return patrol_boat;
 }

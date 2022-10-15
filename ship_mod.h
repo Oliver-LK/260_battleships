@@ -5,6 +5,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define TOTAL_SHIPS 4
+
 
 typedef struct {
     bool hit1;
@@ -22,6 +24,11 @@ typedef struct {
     
 } Ship_t;
 
-Ship_t* ship_init(void);
+Ship_t battle_ship_init(void);
+Ship_t destroyer1_init(void);
+Ship_t destroyer2_init(void);
+Ship_t patrol_boat_init(void);
+
+void display_ship(Ship_t* ship);
 
 #endif
