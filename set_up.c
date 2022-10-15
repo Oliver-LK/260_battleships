@@ -49,16 +49,20 @@ void translation(Ship_t* current_ship)
             }
         }
     if (navswitch_push_event_p (NAVSWITCH_SOUTH)) {
-        if (current_ship->vertical == true && (current_ship->ycoord + current_ship->length) < MAX_BOARD_HEIGHT) {
+        if (current_ship->ycoord + current_ship->length < MAX_BOARD_HEIGHT && current_ship->vertical == true) {
             current_ship->ycoord++;
-            // offset = current_ship->length - 1;
+
+        } else if((current_ship->ycoord < MAX_BOARD_HEIGHT - 1) && current_ship->vertical == false) {
+            current_ship->ycoord++;
         }
     }
 
     if (navswitch_push_event_p (NAVSWITCH_EAST)) {
-        if (current_ship->xcoord < MAX_BOARD_WIDTH - 1) {
-                current_ship->xcoord++;
-            }
+        if (current_ship->xcoord < MAX_BOARD_WIDTH - 1 && current_ship->vertical == true) {
+            current_ship->xcoord++;
+        } else if(current_ship->xcoord + current_ship->length < MAX_BOARD_WIDTH && current_ship->vertical == false) {
+            current_ship->xcoord++;
+        }
         }
     if (navswitch_push_event_p (NAVSWITCH_WEST)) {
         if (current_ship->xcoord > 0) {
@@ -70,9 +74,9 @@ void translation(Ship_t* current_ship)
 
 void rotation(Ship_t* current_ship)
 {
-    if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == true){
+    if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == true && current_ship->xcoord + current_ship->length < MAX_BOARD_WIDTH + 1){
         current_ship->vertical = false;
-    } else if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == false) {
+    } else if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == false && current_ship->ycoord + current_ship->length < MAX_BOARD_HEIGHT + 1) {
         current_ship->vertical = true;
     }
     
@@ -88,39 +92,11 @@ void ship_placement(Ship_t* current_ship)
 
         navswitch_update();
 
-
         display_ship(current_ship);
         display_update();
         display_clear();
 
-        
 
-    //     if (navswitch_push_event_p (NAVSWITCH_NORTH)) {
-    //         if (current_ship->ycoord > 0) {
-    //                 current_ship->ycoord--;
-    //             }
-    //         }
-    //         if (navswitch_push_event_p (NAVSWITCH_SOUTH)) {
-    //             if (current_ship->vertical) {
-    //                 offset = ships[i].length - 1;
-    //             }
-    //             if (ships[i].ycoord < (6 - offset)) {
-    //                 ships[i].ycoord++;
-    //             }
-    //         }
-    //         if (navswitch_push_event_p (NAVSWITCH_EAST)) {
-    //             if (!ships[i].vertical) {
-    //                 offset = ships[i].length - 1;
-    //             }
-    //             if (ships[i].xcoord < (4 - offset)) {
-    //                 ships[i].xcoord++;
-    //             }
-    //         }
-    //         if (navswitch_push_event_p (NAVSWITCH_WEST)) {
-    //             if (ships[i].xcoord > 0) {
-    //                 ships[i].xcoord--;
-    //             }
-    //         }
     }
 }
     
