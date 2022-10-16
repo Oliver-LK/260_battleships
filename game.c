@@ -38,12 +38,6 @@ void initialisation(void)
     display_clear();
 }
 
-void board_set_up()
-{
-    zero_line[] = {0, 0, 0, 0 ,0};
-    
-}
-
 int main (void)
 {
     initialisation();
@@ -53,11 +47,25 @@ int main (void)
     //  Ugly code but only way that work without other consequences 
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
+    
+    //  Sets up board
+    uint8_t zero_row1[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row2[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row3[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row4[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row5[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row6[] = {0, 0, 0, 0, 0};
+    uint8_t zero_row7[] = {0, 0, 0, 0, 0};
+    uint8_t* board_info[] = {zero_row1, zero_row2, zero_row3, zero_row4, zero_row5, zero_row6, zero_row7};
 
     uint8_t ship_index = 0;
-    bool loop = true;
-    while(loop == true) {
-        ship_placement_phase(ships[ship_index], &ship_index);
+    bool plac_phase = true;
+    while(plac_phase == true) {
+        if(ship_index == TOTAL_SHIPS) {
+            plac_phase = false;
+            break;
+        }
+        ship_placement_phase(ships[ship_index], &ship_index, board_info);
         for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
             display_ship(ships[index_ship]);
         }

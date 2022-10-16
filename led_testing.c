@@ -16,7 +16,7 @@
 void flash_led(int8_t time)
 {
     led_set (LED1, 1);
-    timer_wait(1 * F_CPU);
+    //timer_wait(1 * F_CPU);
     led_set (LED1, 0);
 
 }
