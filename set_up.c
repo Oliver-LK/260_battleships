@@ -77,6 +77,7 @@ void translation(Ship_t* current_ship)
 
 void rotation(Ship_t* current_ship)
 {
+    //  Could make another function that deals with these rotation conditions to make more readable
     if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == true && current_ship->xcoord + current_ship->length < MAX_BOARD_WIDTH + 1){
         current_ship->vertical = false;
     } else if (navswitch_push_event_p(NAVSWITCH_PUSH) && current_ship->vertical == false && current_ship->ycoord + current_ship->length < MAX_BOARD_HEIGHT + 1) {
@@ -95,8 +96,9 @@ void placement(uint8_t* ship_index)
 
 
 
-void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index)
+void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, )
 {   
+    led_set(LED1, 1);
     translation(current_ship);
     rotation(current_ship);
     placement(ship_index);

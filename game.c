@@ -38,7 +38,11 @@ void initialisation(void)
     display_clear();
 }
 
-
+void board_set_up()
+{
+    zero_line[] = {0, 0, 0, 0 ,0};
+    
+}
 
 int main (void)
 {
@@ -51,8 +55,8 @@ int main (void)
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
 
     uint8_t ship_index = 0;
-    bool re_position = true;
-    while(re_position == true) {
+    bool loop = true;
+    while(loop == true) {
         ship_placement_phase(ships[ship_index], &ship_index);
         for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
             display_ship(ships[index_ship]);
