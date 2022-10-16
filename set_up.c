@@ -19,10 +19,9 @@
 #include "set_up.h"
 #include "ship_mod.h"
 
-
-
 void greetings(void)
 {
+    led_set (LED1, 0);
     tinygl_init (PACER_FREQ);
     tinygl_font_set (&font5x7_1);
     tinygl_text_speed_set (MESSAGE_RATE);
@@ -86,22 +85,48 @@ void rotation(Ship_t* current_ship)
     
 }
 
-void placement(uint8_t* ship_index)
+bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
 {
-    //bool board[5][7] = {0};
     if(button_push_event_p(0)) {
+        for(uint8_t index = 0; index < current_ship->length; index++) {
+            if(current_ship->vertical == true && board_info[current_ship->ycoord +index][current_ship->xcoord] == 1) {
+                return false;
+            } 
+            else if(current_ship->vertical == false && board_info[current_ship->ycoord][current_ship->xcoord + index] == 1) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
+{
+    bool valid_placement = test_overlap(current_ship, board_info);
+    if(valid_placement == true && button_push_event_p(0)) {
+        for(uint8_t index = 0; index < current_ship->length; index++) {
+            if(current_ship->vertical == true) {
+                board_info[current_ship->ycoord +index][current_ship->xcoord] = 1;
+            } 
+            else if(current_ship->vertical == false) {
+                board_info[current_ship->ycoord][current_ship->xcoord + index] = 1;
+            }
+            
+        }
         *ship_index = *ship_index + 1;
     }
+    
 }
 
 
 
-void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board)
+void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
 {   
-    led_set(LED1, 1);
     translation(current_ship);
     rotation(current_ship);
-    placement(ship_index);
+    placement(current_ship, ship_index, board_info);
+    
 
     navswitch_update();
     button_update();
@@ -109,7 +134,6 @@ void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** b
     display_ship(current_ship);
     display_update();
     display_clear();
-
 
 }
     

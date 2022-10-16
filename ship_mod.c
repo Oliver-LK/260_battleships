@@ -23,6 +23,7 @@ void display_ship(Ship_t* ship)
             display_pixel_set(ship->xcoord + ship_index, ship->ycoord, true);
         }
     }
+    
 }
 
 
