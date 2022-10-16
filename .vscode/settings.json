@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "pacer.h": "c",
+        "ship_mod.h": "c",
+        "navswitch.h": "c",
+        "set_up.h": "c",
+        "tinygl.h": "c"
+    }
+}
