@@ -74,7 +74,7 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../driv
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o display.o led.o set_up.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o ship_mod.o led_testing.o timer.o timer0.o button.o usart1.o font.o prescale.o
+game.out: game.o system.o display.o led.o set_up.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o ship_mod.o test_case.o led_testing.o timer.o timer0.o button.o usart1.o font.o prescale.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

@@ -19,6 +19,7 @@
 #include "set_up.h"
 #include "ship_mod.h"
 
+//  Entry message as well as set up
 void greetings(void)
 {
     led_set (LED1, 0);
@@ -43,6 +44,7 @@ void greetings(void)
     display_clear();
 }
 
+//  Deals with translational movement of the ships
 void translation(Ship_t* current_ship)
 {
     if (navswitch_push_event_p (NAVSWITCH_NORTH)) {
@@ -74,6 +76,7 @@ void translation(Ship_t* current_ship)
     }
 }
 
+//  Deals with rotational movement of the ships
 void rotation(Ship_t* current_ship)
 {
     //  Could make another function that deals with these rotation conditions to make more readable
@@ -85,6 +88,7 @@ void rotation(Ship_t* current_ship)
     
 }
 
+//  Checks if ships are overlapped
 bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
 {
     if(button_push_event_p(0)) {
@@ -100,7 +104,7 @@ bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
     return true;
 }
 
-
+//  If ships are not overlapped then writes to board matrix
 void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
 {
     bool valid_placement = test_overlap(current_ship, board_info);
@@ -114,13 +118,13 @@ void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
             }
             
         }
-        *ship_index = *ship_index + 1;
+        *ship_index = *ship_index + 1;  //  This pointer increments the ship array in game.c
     }
     
 }
 
 
-
+//  Main ship function that directs the rest
 void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
 {   
     translation(current_ship);

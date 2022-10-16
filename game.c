@@ -21,6 +21,7 @@
 #include "ship_mod.h"
 #include "led_testing.h"
 #include "set_up.h"
+#include "test_case.h"
 
 #define PACER_FREQ 500
 
@@ -47,7 +48,7 @@ int main (void)
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    //  Sets up board
+    //  Sets up board: NEEDS TO BE OPTIMIZED
     uint8_t zero_row1[] = {0, 0, 0, 0, 0};
     uint8_t zero_row2[] = {0, 0, 0, 0, 0};
     uint8_t zero_row3[] = {0, 0, 0, 0, 0};
@@ -57,6 +58,7 @@ int main (void)
     uint8_t zero_row7[] = {0, 0, 0, 0, 0};
     uint8_t* board_info[] = {zero_row1, zero_row2, zero_row3, zero_row4, zero_row5, zero_row6, zero_row7};
 
+    //  Starts the ship placement phase
     uint8_t ship_index = 0;
     bool place_phase = true;
     while(place_phase == true) {
@@ -71,12 +73,8 @@ int main (void)
 
     }
 
-    //  testing to see if ships are all there
-    while(1) {
-        led_set (LED1, 1);
-        for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-            display_ship(ships[index_ship]);
-            display_update();
-        }
+    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
+    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
+        test_ship_positions(ships[index_ship], true);
     }
 }
