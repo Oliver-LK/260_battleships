@@ -15,6 +15,7 @@
 #include "button.h"
 #include "led.h"
 #include "ledmat.h"
+#include "ir_uart.h"
 
 //  Game Libraries
 #include "setup.h"
@@ -34,6 +35,7 @@ void initialisation(void)
     navswitch_init();
     button_init();
     led_init();
+    ir_uart_init();
 
     led_set (LED1, 0);
     display_clear();
@@ -76,5 +78,40 @@ int main (void)
     //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
     for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
         test_ship_positions(ships[index_ship], true);
+    }
+
+    /*Check to see if this board is first to initialise, then make it player 1*/
+
+    bool player1 = false;
+    char recieved;
+    if (ir_uart_read_ready_p()) {
+        recieved = ir_uart_getc();
+        ir_uart_putc('!');
+    } else {
+        bool player1 = true;
+        bool waitingforopp = true;
+        while (waitingforopp) {
+            ir_uart_putc('!');
+            if (ir_uart_read_ready_p()) {
+                recieved = ir_uart_getc();
+                waitingforopp = false;
+            }
+        }
+    }
+
+
+
+    /*Start of while loop for game*/
+    bool game_over = false;
+
+    /*Large while loop for whole game*/
+    while (!game_over) {
+
+
+
+
+
+
+
     }
 }
