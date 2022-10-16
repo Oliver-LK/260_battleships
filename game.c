@@ -59,16 +59,25 @@ int main (void)
     uint8_t* board_info[] = {zero_row1, zero_row2, zero_row3, zero_row4, zero_row5, zero_row6, zero_row7};
 
     uint8_t ship_index = 0;
-    bool plac_phase = true;
-    while(plac_phase == true) {
+    bool place_phase = true;
+    while(place_phase == true) {
         if(ship_index == TOTAL_SHIPS) {
-            plac_phase = false;
-            break;
+            place_phase = false;
+
         }
         ship_placement_phase(ships[ship_index], &ship_index, board_info);
         for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
             display_ship(ships[index_ship]);
         }
 
+    }
+
+    //  testing to see if ships are all there
+    while(1) {
+        led_set (LED1, 1);
+        for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
+            display_ship(ships[index_ship]);
+            display_update();
+        }
     }
 }
