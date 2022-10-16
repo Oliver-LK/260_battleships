@@ -41,7 +41,7 @@ void greetings(void)
         }
         
     }
-    
+    display_clear();
 }
 
 void translation(Ship_t* current_ship)
@@ -88,7 +88,7 @@ void rotation(Ship_t* current_ship)
 
 void placement(uint8_t* ship_index)
 {
-    bool board[5][7] = {0};
+    //bool board[5][7] = {0};
     if(button_push_event_p(0)) {
         *ship_index = *ship_index + 1;
     }
@@ -96,7 +96,7 @@ void placement(uint8_t* ship_index)
 
 
 
-void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, )
+void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board)
 {   
     led_set(LED1, 1);
     translation(current_ship);
