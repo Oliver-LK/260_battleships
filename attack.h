@@ -15,15 +15,17 @@ typedef struct
 
 uint8_t** shot_matrix(void);
 
+void display_change();
+
 void display_current_shot(Shot_t* current_shot);
-void display_shot_board(uint8_t** shot_board);
+void display_shots(uint8_t** shot_board);
 void shot_movement(Shot_t* current_shot);
 bool test_shot(uint8_t** shot_board, Shot_t* current_shot);
-void select_shot(uint8_t** shot_board, Shot_t* current_shot);
-uint8_t take_shot(uint8_t** shot_board, Shot_t* current_shot);
-void attack_phase(uint8_t** board_info, uint8_t** shot_board, Shot_t* current_shot, bool my_turn);
+void select_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
+void take_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
+void attack_phase(uint8_t** board_info, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
 
-void display_shots(uint8_t** shot_board);
+
 
 
 
