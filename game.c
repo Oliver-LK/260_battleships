@@ -77,11 +77,15 @@ int main (void)
 
     //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
     for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-        test_ship_positions(ships[index_ship], true);
+        test_ship_positions(ships[index_ship], true); //  bypass mode ON
     }
+
+
+
 
     /*Check to see if this board is first to initialise, then make it player 1*/
 
+    //  This needs to be in a separate function
     bool player1 = false;
     char recieved;
     if (ir_uart_read_ready_p()) {

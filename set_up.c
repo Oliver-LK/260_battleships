@@ -28,16 +28,17 @@ void greetings(void)
     tinygl_text_speed_set (MESSAGE_RATE);
     tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
 
-    tinygl_text("Welcome! Push a button to continue\0"); 
+    tinygl_text("Hi! Push NAV to start\0"); 
 
     bool loop = true;
     while (loop != false) {
-        pacer_wait();
         navswitch_update();
+        pacer_wait();
         button_update();
         tinygl_update();
-        if(navswitch_push_event_p(NAVSWITCH_PUSH) || button_push_event_p(0)){
+        if(navswitch_push_event_p(NAVSWITCH_PUSH)){
             loop = false;
+            
         }
         
     }
