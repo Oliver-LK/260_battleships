@@ -92,18 +92,11 @@ int main (void)
     }
 
 
-
     /*Check to see if this board is first to initialise, then make it player 1*/
     bool player1 = player1_check();
 
     /*Start of while loop for game*/
     bool game_over = false;
 
-    /*Large while loop for whole game*/
-    while (!game_over) {
-        if (player1) {
-            
-        }
-
-    }
+    
 }
