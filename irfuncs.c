@@ -11,6 +11,9 @@ bool player1_check(void) {
     char recieved;
     if (ir_uart_read_ready_p()) {
         recieved = ir_uart_getc();
+        if (recieved != '!') {
+            player1 = true;
+        }
         ir_uart_putc('!');
     } else {
         bool player1 = true;
