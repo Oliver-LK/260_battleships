@@ -94,7 +94,7 @@ int main (void)
             led_set(LED1, 1);
         }
     }
-
+}
 //     bool do_attack_phase = true;
 //     Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
 //     Shot_t* shot_ptr = &new_shot;
