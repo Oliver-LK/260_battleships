@@ -1,3 +1,7 @@
+/*  This module contains all the functions related to the set up phase which involves ship placement.
+    This infomation is alters the each Ship_t object hence the pointers.
+    A 7x5 matrix is also created which represents the board. 1 represent where a ship is present */
+
 #ifndef SET_UP_H
 #define SET_UP_H
 
