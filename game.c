@@ -41,6 +41,8 @@ void initialisation(void)
     display_clear();
 }
 
+
+
 int main (void)
 {
     initialisation();
@@ -51,14 +53,7 @@ int main (void)
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
     //  Sets up board: NEEDS TO BE OPTIMIZED
-    uint8_t zero_row1[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row2[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row3[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row4[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row5[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row6[] = {0, 0, 0, 0, 0};
-    uint8_t zero_row7[] = {0, 0, 0, 0, 0};
-    uint8_t* board_info[] = {zero_row1, zero_row2, zero_row3, zero_row4, zero_row5, zero_row6, zero_row7};
+    uint8_t** board_info = board_maker();
 
     //  Starts the ship placement phase
     uint8_t ship_index = 0;
@@ -79,8 +74,6 @@ int main (void)
     for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
         test_ship_positions(ships[index_ship], true); //  bypass mode ON
     }
-
-
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/

@@ -17,6 +17,7 @@
 #define MAX_BOARD_WIDTH 5
 
 void greetings(void);
+uint8_t** board_maker(void);
 void translation(Ship_t* current_ship);
 void rotation(Ship_t* current_ship);
 void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info);

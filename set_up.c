@@ -49,6 +49,18 @@ void greetings(void)
     display_clear();
 }
 
+uint8_t** board_maker(void) 
+{
+    uint8_t* values = calloc(MAX_BOARD_HEIGHT * MAX_BOARD_WIDTH, sizeof(uint8_t));
+    uint8_t** board = malloc(MAX_BOARD_HEIGHT * sizeof(uint8_t*));
+    for(int i=0; i<MAX_BOARD_HEIGHT; i++)
+    {
+        board[i] = values + i * MAX_BOARD_WIDTH;
+    }
+
+    return board;
+}
+
 //  Deals with translational movement of the ships
 void translation(Ship_t* current_ship)
 {
