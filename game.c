@@ -84,33 +84,16 @@ int main (void)
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
-
-    //  This needs to be in a separate function
-    bool player1 = false;
-    char recieved;
-    if (ir_uart_read_ready_p()) {
-        recieved = ir_uart_getc();
-        ir_uart_putc('!');
-    } else {
-        bool player1 = true;
-        bool waitingforopp = true;
-        while (waitingforopp) {
-            ir_uart_putc('!');
-            if (ir_uart_read_ready_p()) {
-                recieved = ir_uart_getc();
-                waitingforopp = false;
-            }
-        }
-    }
-
-
+    bool player1 = player1_check();
 
     /*Start of while loop for game*/
     bool game_over = false;
 
     /*Large while loop for whole game*/
     while (!game_over) {
-
+        if (player1) {
+            
+        }
 
 
 

@@ -5,7 +5,7 @@
 #include "system.h"
 #include "pio.h"
 
-bool player1_check(void) {}
+bool player1_check(void) {
     bool player1 = false;
     char recieved;
     if (ir_uart_read_ready_p()) {
@@ -22,4 +22,5 @@ bool player1_check(void) {}
             }
         }
     }
+    return player1;
 }
