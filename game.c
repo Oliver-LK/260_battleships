@@ -52,6 +52,7 @@ void initialisation(void)
 
 int main (void)
 {
+
     initialisation();
     greetings();
 
@@ -90,8 +91,9 @@ int main (void)
 
     /*Player1 check test*/
     if (player1) {
+        led_set(LED1_PIO, 1);
         while (1) {
-            led_set(LED1, 1);
+            
         }
     }
 }
