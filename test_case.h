@@ -1,3 +1,6 @@
+/*  Module where we can host test cases and save them for future use and debugging
+    None of this will be used in the final game */
+
 #ifndef TESTS_H
 #define TESTS_H
 
