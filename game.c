@@ -84,7 +84,7 @@ int main (void)
     }
 
     bool do_attack_phase = true;
-    Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
+    Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
     Shot_t* shot_ptr = &new_shot;
     while(do_attack_phase == true) {
         bool my_turn = true;  // This should be defined by IR communication

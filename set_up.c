@@ -38,7 +38,6 @@ void greetings(void)
         tinygl_update();
         if(navswitch_push_event_p(NAVSWITCH_PUSH)){
             loop = false;
-            
         }
         
     }
@@ -80,11 +79,10 @@ void translation(Ship_t* current_ship)
         } else if(current_ship->xcoord + current_ship->length < MAX_BOARD_WIDTH && current_ship->vertical == false) {
             current_ship->xcoord++;
         }
-        }
+    }
     if (navswitch_push_event_p (NAVSWITCH_WEST)) {
         if (current_ship->xcoord > 0) {
             current_ship->xcoord--;
-            // offset = current_ship->length - 1;
         }
     }
 }
@@ -120,8 +118,7 @@ bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
 //  If ships are not overlapped then writes to board matrix
 void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
 {
-    bool valid_placement = test_overlap(current_ship, board_info);
-    if(valid_placement == true && button_push_event_p(0)) {
+    if(test_overlap(current_ship, board_info) == true && button_push_event_p(0)) {
         for(uint8_t index = 0; index < current_ship->length; index++) {
             if(current_ship->vertical == true) {
                 board_info[current_ship->ycoord +index][current_ship->xcoord] = 1;
@@ -158,7 +155,7 @@ void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** b
     display_update();
     display_clear();
 
-    if(*ship_index == 4) {
+    if(*ship_index == TOTAL_SHIPS) {
         reset_display();
     }
 
