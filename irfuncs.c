@@ -4,6 +4,7 @@
 #include "ir_uart.h"
 #include "system.h"
 #include "pio.h"
+#include "led.h"
 
 bool player1_check(void) {
     bool player1 = false;

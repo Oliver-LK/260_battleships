@@ -91,9 +91,9 @@ int main (void)
 
     /*Player1 check test*/
     if (player1) {
-        led_set(LED1_PIO, 1);
+        led_set(LED1, 1);
         while (1) {
-            
+
         }
     }
 }
