@@ -83,27 +83,35 @@ int main (void)
         test_ship_positions(ships[index_ship], false); //  bypass mode ON
     }
 
-    bool do_attack_phase = true;
-    Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
-    Shot_t* shot_ptr = &new_shot;
-    while(do_attack_phase == true) {
-        bool my_turn = true;  // This should be defined by IR communication
-        attack_phase(board_info, shot_board, shot_ptr,  my_turn);
-    }
-
-
 
     /*Check to see if this board is first to initialise, then make it player 1*/
     bool player1 = player1_check();
+    bool my_turn = player1;
 
-    /*Start of while loop for game*/
-    bool game_over = false;
-
-    /*Large while loop for whole game*/
-    while (!game_over) {
-        if (player1) {
-            
+    /*Player1 check test*/
+    if (player1) {
+        while (1) {
+            led_set(LED1, 1);
         }
-
     }
-}
+
+//     bool do_attack_phase = true;
+//     Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
+//     Shot_t* shot_ptr = &new_shot;
+//     while(do_attack_phase == true) {
+//         attack_phase(board_info, shot_board, shot_ptr,  my_turn);
+//     }
+
+
+
+//     /*Start of while loop for game*/
+//     bool game_over = false;
+
+//     /*Large while loop for whole game*/
+//     while (!game_over) {
+//         if (player1) {
+            
+//         }
+
+//     }
+// }
