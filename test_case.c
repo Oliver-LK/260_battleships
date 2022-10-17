@@ -1,4 +1,5 @@
-//  Module where we can host test cases and save them for future use
+/*  Module where we can host test cases and save them for future use and debugging
+    None of this will be used in the final game */
 
 //  C Libraries
 #include <stdint.h>
@@ -31,4 +32,9 @@ void test_ship_positions(Ship_t* current_ship, bool test)
             display_update();
         }
     }
+}
+
+void opponent_test_board(void)
+{
+    
 }
