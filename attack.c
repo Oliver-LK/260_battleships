@@ -123,7 +123,11 @@ void attack_phase(uint8_t** my_board_info, uint8_t** shot_board, Shot_t* current
 
 void display_shots(uint8_t** shot_board)
 {
-    shot_board[0][0] == 1 ? display_pixel_set(0, 0, true) : NULL;
+    for(uint8_t y_row = 0; y_row < MAX_BOARD_HEIGHT; y_row++) {
+        for(uint8_t x_row = 0; x_row < MAX_BOARD_WIDTH; x_row++) {
+            shot_board[y_row][x_row] == 1 ? display_pixel_set(x_row, y_row, true) : NULL;
+        }
+    }
     display_change();
 
 }
