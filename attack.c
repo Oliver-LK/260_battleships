@@ -39,12 +39,8 @@ void display_current_shot(Shot_t* current_shot)
     display_pixel_set(current_shot->xcoord, current_shot->ycoord, true);
 }
 
-uint8_t take_shot(Shot_t* current_shot)
+void shot_movement(Shot_t* current_shot)
 {
-    display_current_shot(current_shot);
-    display_update();
-    display_clear();
-
     if(navswitch_push_event_p(NAVSWITCH_SOUTH) && current_shot->ycoord < MAX_BOARD_HEIGHT - 1) {
         current_shot->ycoord++;
     }
@@ -62,10 +58,38 @@ uint8_t take_shot(Shot_t* current_shot)
     }
 }
 
-void attack_phase(uint8_t** my_board_info, Shot_t* current_shot, bool my_turn)
+bool test_shot(uint8_t** shot_board, Shot_t* current_shot)
+{
+    if(button_push_event_p(0) && shot_board[current_shot->ycoord][current_shot->xcoord] == 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+void select_shot(uint8_t** shot_board, Shot_t* current_shot)
+{
+    if((button_push_event_p(0)) && test_shot(shot_board, current_shot) == true) {
+        shot_board[current_shot->ycoord][current_shot->xcoord] = 1;
+    }
+}
+
+uint8_t take_shot(uint8_t** shot_board, Shot_t* current_shot)
+{
+    shot_movement(current_shot);
+    display_current_shot(current_shot);
+    display_update();
+    display_clear();
+
+    select_shot(shot_board, current_shot);
+
+    return 0;
+}
+
+void attack_phase(uint8_t** my_board_info, uint8_t** shot_board, Shot_t* current_shot, bool my_turn)
 {
     if(my_turn == true) {
-        uint8_t shot_pos = take_shot(current_shot);
+        uint8_t shot_pos = take_shot(shot_board, current_shot);
         navswitch_update();
         button_update();
     }

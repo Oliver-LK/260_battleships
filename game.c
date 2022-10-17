@@ -61,6 +61,7 @@ int main (void)
     
     //  Sets up board: NEEDS TO BE OPTIMIZED
     uint8_t** board_info = board_maker();
+    uint8_t** shot_board = shot_matrix();
 
     //  Starts the ship placement phase
     uint8_t ship_index = 0;
@@ -87,7 +88,7 @@ int main (void)
     Shot_t* shot_ptr = &new_shot;
     while(do_attack_phase == true) {
         bool my_turn = true;  // This should be defined by IR communication
-        attack_phase(board_info, shot_ptr,  my_turn);
+        attack_phase(board_info, shot_board, shot_ptr,  my_turn);
     }
 
 
