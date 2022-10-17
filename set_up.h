@@ -24,5 +24,6 @@ void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info);
 bool valid_placement(uint8_t** board_info);
 bool test_overlap(Ship_t* current_ship, uint8_t** board_info);
 void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info);
+void reset_display(void);
 
 #endif

@@ -27,10 +27,6 @@
 void greetings(void)
 {
     led_set (LED1, 0);
-    tinygl_init (PACER_FREQ);
-    tinygl_font_set (&font5x7_1);
-    tinygl_text_speed_set (MESSAGE_RATE);
-    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
 
     tinygl_text("Hi! Push NAV to start\0"); 
 
@@ -140,6 +136,12 @@ void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
     
 }
 
+void reset_display(void)
+{
+    display_update();
+    display_clear();
+}
+
 
 //  Main ship function that directs the rest
 void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
@@ -155,6 +157,10 @@ void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** b
     display_ship(current_ship);
     display_update();
     display_clear();
+
+    if(*ship_index == 4) {
+        reset_display();
+    }
 
 }
     
