@@ -26,7 +26,6 @@ void display_ship(Ship_t* ship)
     
 }
 
-
 Ship_t battle_ship_init(void) {
     Ship_t battle_ship = {
         .xcoord = 0,

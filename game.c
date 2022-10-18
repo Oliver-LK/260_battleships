@@ -38,6 +38,7 @@ void initialisation(void)
     pacer_init(PACER_FREQ);
     system_init();
     navswitch_init();
+    timer_init();
     button_init();
     led_init();
     ir_uart_init();
@@ -86,14 +87,18 @@ int main (void)
     }
 
     bool do_attack_phase = true;
-    Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
+    Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
     Shot_t* shot_ptr = &new_shot;
     bool my_turn = true;
     while(do_attack_phase == true) {
         for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
             attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
         }
+        if(my_turn == false) {
+            timer_wait(100000);
+        }
         
+        my_turn = true;
     }
 
 

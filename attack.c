@@ -89,7 +89,6 @@ void select_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
     if((button_push_event_p(0)) && test_shot(shot_board, current_shot) == true) {
         shot_board[current_shot->ycoord][current_shot->xcoord] = 1;
-        current_shot->num++;
         *my_turn = false; 
     }
 }
@@ -113,7 +112,7 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
         if(*my_turn == false) {
             // send coords to player
             // call function to see if hit and display message
-            led_set(LED1, 1);
+            // led_set(LED1, 1);
         }
 
     } else if(*my_turn == false) {

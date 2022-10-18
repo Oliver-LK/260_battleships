@@ -10,7 +10,6 @@ typedef struct
 {
     uint8_t xcoord;
     uint8_t ycoord;
-    uint32_t num;
 } Shot_t;
 
 uint8_t** shot_matrix(void);
