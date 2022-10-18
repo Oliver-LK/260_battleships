@@ -1,3 +1,8 @@
+/*  File:   ship_mod.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains functions and struct related to ships as well as display function */
+
 #ifndef SHIP_MOD_H
 #define SHIP_MOD_H
 
@@ -9,18 +14,11 @@
 
 
 typedef struct {
-    bool hit1;
-    bool hit2;
-    bool hit3;
-    bool hit4;
-} Hits_t;
-
-typedef struct {
     uint8_t length;
     uint8_t xcoord;
     uint8_t ycoord;
     bool vertical;
-    Hits_t hits;
+    uint8_t hits[TOTAL_SHIPS * sizeof(uint8_t)];
     
 } Ship_t;
 

@@ -1,6 +1,9 @@
-/*  This module contains all the functions related to the set up phase which involves ship placement.
-    This infomation is alters the each Ship_t object hence the pointers.
-    A 7x5 matrix is also created which represents the board. 1 represent where a ship is present */
+/*  File:   set_up.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains all the functions related to the set up phase which involves ship placement.
+            This infomation is alters the each Ship_t object hence the pointers.
+            A 7x5 matrix is also created which represents the board. 1 represent where a ship is present */
 
 //  C Libraries
 #include <stdint.h>
@@ -44,16 +47,17 @@ void greetings(void)
     display_clear();
 }
 
-uint8_t** board_maker(void) 
+//  Creates a 7x5 board where ships will be stored
+uint8_t** ship_board_maker(void) 
 {
     uint8_t* values = calloc(MAX_BOARD_HEIGHT * MAX_BOARD_WIDTH, sizeof(uint8_t));
-    uint8_t** board = malloc(MAX_BOARD_HEIGHT * sizeof(uint8_t*));
+    uint8_t** ship_board = malloc(MAX_BOARD_HEIGHT * sizeof(uint8_t*));
     for(int i=0; i<MAX_BOARD_HEIGHT; i++)
     {
-        board[i] = values + i * MAX_BOARD_WIDTH;
+        ship_board[i] = values + i * MAX_BOARD_WIDTH;
     }
 
-    return board;
+    return ship_board;
 }
 
 //  Deals with translational movement of the ships
@@ -99,15 +103,15 @@ void rotation(Ship_t* current_ship)
     
 }
 
-//  Checks if ships are overlapped
-bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
+//  Checks if ships are overlapped and returns a bool
+bool test_overlap(Ship_t* current_ship, uint8_t** ship_board)
 {
     if(button_push_event_p(0)) {
         for(uint8_t index = 0; index < current_ship->length; index++) {
-            if(current_ship->vertical == true && board_info[current_ship->ycoord +index][current_ship->xcoord] == 1) {
+            if(current_ship->vertical == true && ship_board[current_ship->ycoord +index][current_ship->xcoord] == 1) {
                 return false;
             } 
-            else if(current_ship->vertical == false && board_info[current_ship->ycoord][current_ship->xcoord + index] == 1) {
+            else if(current_ship->vertical == false && ship_board[current_ship->ycoord][current_ship->xcoord + index] == 1) {
                 return false;
             }
         }
@@ -115,16 +119,16 @@ bool test_overlap(Ship_t* current_ship, uint8_t** board_info)
     return true;
 }
 
-//  If ships are not overlapped then writes to board matrix
-void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
+//  If ships are not overlapped then writes the ships position to ship_board
+void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** ship_board)
 {
-    if(test_overlap(current_ship, board_info) == true && button_push_event_p(0)) {
+    if(test_overlap(current_ship, ship_board) == true && button_push_event_p(0)) {
         for(uint8_t index = 0; index < current_ship->length; index++) {
             if(current_ship->vertical == true) {
-                board_info[current_ship->ycoord +index][current_ship->xcoord] = 1;
+                ship_board[current_ship->ycoord +index][current_ship->xcoord] = 1;
             } 
             else if(current_ship->vertical == false) {
-                board_info[current_ship->ycoord][current_ship->xcoord + index] = 1;
+                ship_board[current_ship->ycoord][current_ship->xcoord + index] = 1;
             }
             
         }
@@ -133,6 +137,7 @@ void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
     
 }
 
+//  Simply resets display
 void reset_display(void)
 {
     display_update();
@@ -140,12 +145,12 @@ void reset_display(void)
 }
 
 
-//  Main ship function that directs the rest
-void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info)
+//  Main ship function that directs the rest of the ship functions
+void ship_placement_phase(Ship_t* current_ship, uint8_t* ship_index, uint8_t** ship_board)
 {   
     translation(current_ship);
     rotation(current_ship);
-    placement(current_ship, ship_index, board_info);
+    placement(current_ship, ship_index, ship_board);
     
 
     navswitch_update();

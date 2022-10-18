@@ -1,4 +1,8 @@
-/*  This is the attack phase where each player will be able to attack the other player */
+/*  File:   attack.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains all the functions related to the attack phase of the game.
+            Includes selecting where you want to shoot and indicates if hit or miss. */
 
 //  C Libraries
 #include <stdint.h>
@@ -34,20 +38,44 @@ uint8_t** shot_matrix(void)
     return board;
 }
 
+void display_change()
+{
+    display_update();
+    display_clear();
+}
+
 void display_current_shot(Shot_t* current_shot)
 {
     display_pixel_set(current_shot->xcoord, current_shot->ycoord, true);
 }
 
-void display_shot_board(uint8_t** shot_board)
+void display_shots(uint8_t** shot_board)
 {
-    // for(uint8_t y_index = 0; y_index < MAX_BOARD_HEIGHT - 1; y_index++) {
-    //     for(uint8_t x_index; x_index < MAX_BOARD_WIDTH - 1; x_index++) {
-    //         if(shot_board[2][1] == 1)
-    //             display_pixel_set(1, 2, true);
-    //     }
-    // }
-    // display_change();
+    for(uint8_t y_row = 0; y_row < MAX_BOARD_HEIGHT; y_row++) {
+        for(uint8_t x_row = 0; x_row < MAX_BOARD_WIDTH; x_row++) {
+            shot_board[y_row][x_row] == 1 ? display_pixel_set(x_row, y_row, true) : NULL;
+        }
+    }
+    display_change();
+
+}
+
+void wait(void)
+{
+    for(uint8_t index = 0; index < FLASH_RATE; index++) {
+        pacer_wait();
+    }
+}
+
+void indicate_hit(void) 
+{
+    led_set(LED1, 0);
+    for(uint8_t number = 0; number < NUM_FLASHES; number++) {
+        led_set(LED1, 1);
+        wait();
+        led_set(LED1, 0);
+        wait();
+    }
 }
 
 void shot_movement(Shot_t* current_shot)
@@ -67,6 +95,7 @@ void shot_movement(Shot_t* current_shot)
     if(navswitch_push_event_p(NAVSWITCH_WEST) && current_shot->xcoord > 0) {
         current_shot->xcoord--;
     }
+
 }
 
 bool test_shot(uint8_t** shot_board, Shot_t* current_shot)
@@ -78,52 +107,46 @@ bool test_shot(uint8_t** shot_board, Shot_t* current_shot)
     }
 }
 
-void select_shot(uint8_t** shot_board, Shot_t* current_shot)
+void select_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
     if((button_push_event_p(0)) && test_shot(shot_board, current_shot) == true) {
         shot_board[current_shot->ycoord][current_shot->xcoord] = 1;
-        current_shot->num++;
+        *my_turn = false; 
     }
 }
 
-uint8_t take_shot(uint8_t** shot_board, Shot_t* current_shot)
+void take_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
     shot_movement(current_shot);
     display_current_shot(current_shot);
-    display_shot_board(shot_board);
-    select_shot(shot_board, current_shot);
-
-    return 0;
+    select_shot(shot_board, current_shot, my_turn);
 }
 
-void display_change()
-{
-    display_update();
-    display_clear();
-}
 
-void attack_phase(uint8_t** my_board_info, uint8_t** shot_board, Shot_t* current_shot, bool my_turn)
+
+void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
-    if(my_turn == true) {
-        uint8_t shot_pos = take_shot(shot_board, current_shot);
-        //display_shot_board(shot_board);
+    if(*my_turn == true) {
+        take_shot(shot_board, current_shot, my_turn);
         navswitch_update();
         button_update();
-        //display_shot_board(shot_board);
         display_shots(shot_board);
-
-        if(shot_board[2][1] == 1) {
-            display_pixel_set(1, 2, true);
+        if(*my_turn == false) {
+            if(true) { // You hit the other player
+                indicate_hit();
+            }
+            // send coords to player
+            // led_set(LED1, 1);
         }
- 
+
+    } else if(*my_turn == false) {
+        current_ship->hits[1] = 1; //  mimicking a hit on ur ship 
+        display_ship(current_ship);
+        display_change();
+
+        //  have function that takes coords from other player
+        //  have another function that tests these coords at board
+        //  display board
     }
-
-}
-
-
-void display_shots(uint8_t** shot_board)
-{
-    shot_board[0][0] == 1 ? display_pixel_set(0, 0, true) : NULL;
-    display_change();
 
 }

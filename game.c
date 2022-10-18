@@ -1,5 +1,12 @@
+/*  File:   game.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  Main game file. Includes initiations and game schedular */
+
 //  To delete all .o files
 //  find . -type f -name '*.o' -delete
+//  find . -type f -name '*.out' -delete
+//  find . -type f -name '*.hex' -delete
 //  C Libraries
 #include <stdint.h>
 #include <stdbool.h>
@@ -20,22 +27,21 @@
 #include "../fonts/font5x7_1.h"
 
 //  Game Libraries
-#include "setup.h"
 #include "ship_mod.h"
 #include "led_testing.h"
 #include "set_up.h"
 #include "test_case.h"
 #include "attack.h"
 
-#define PACER_FREQ 500
 
-/* Initialisation section*/
+/*  Initialisation section*/
 void initialisation(void) 
 { 
     display_init();
     pacer_init(PACER_FREQ);
     system_init();
     navswitch_init();
+    timer_init();
     button_init();
     led_init();
     ir_uart_init();
@@ -48,8 +54,9 @@ void initialisation(void)
     display_clear();
 }
 
-
-
+/*  This the the schedular which schedules all events and also declares any variables that will
+    are used throughout most sections of the program. This includes the position of the ships
+    for example */
 int main (void)
 {
     initialisation();
@@ -59,8 +66,8 @@ int main (void)
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    //  Sets up board: NEEDS TO BE OPTIMIZED
-    uint8_t** board_info = board_maker();
+    //  Sets up boards 
+    uint8_t** ship_board = ship_board_maker();
     uint8_t** shot_board = shot_matrix();
 
     //  Starts the ship placement phase
@@ -69,34 +76,28 @@ int main (void)
     while(do_place_phase == true) {
         if(ship_index == TOTAL_SHIPS) {
             do_place_phase = false;
-
         }
-        ship_placement_phase(ships[ship_index], &ship_index, board_info);
+        ship_placement_phase(ships[ship_index], &ship_index, ship_board);
         for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
             display_ship(ships[index_ship]);
         }
-
     }
 
-    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-        test_ship_positions(ships[index_ship], false); //  bypass mode ON
-    }
-
+    //  Starts Attack phase
     bool do_attack_phase = true;
-    Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
+    Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
     Shot_t* shot_ptr = &new_shot;
+    bool my_turn = true;
     while(do_attack_phase == true) {
-        bool my_turn = true;  // This should be defined by IR communication
-        attack_phase(board_info, shot_board, shot_ptr,  my_turn);
+        for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
+            attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
+        }
+        // if(my_turn == false) {
+        //     pacer_wait();
+        // }
+        
+        // my_turn = true;
     }
-
-
-    /*Check to see if this board is first to initialise, then make it player 1*/
-    bool player1 = player1_check();
-
-    /*Start of while loop for game*/
-    bool game_over = false;
-
-    
 }
+
+   /*Large while loop for whole game*/

@@ -1,5 +1,7 @@
-/*  Module where we can host test cases and save them for future use and debugging
-    None of this will be used in the final game */
+/*  File:   test_case.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains functions and test cases used in testing phase of code. */
 
 //  C Libraries
 #include <stdint.h>
