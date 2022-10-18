@@ -1,3 +1,8 @@
+/*  File:   ship_mod.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains fucntions and struct related to ships as well as display function */
+
 //  C libs
 #include <stdint.h>
 #include <stdbool.h>

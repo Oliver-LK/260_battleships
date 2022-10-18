@@ -1,4 +1,7 @@
-/*  Ship module including all ship specific functions*/
+/*  File:   ship_mod.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains functions and struct related to ships as well as display function */
 
 #ifndef SHIP_MOD_H
 #define SHIP_MOD_H
