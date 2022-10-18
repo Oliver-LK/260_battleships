@@ -84,21 +84,6 @@ int main (void)
         }
     }
 
-    //  Starts Attack phase
-    bool do_attack_phase = true;
-    Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
-    Shot_t* shot_ptr = &new_shot;
-    bool my_turn = true;
-    while(do_attack_phase == true) {
-        for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
-            attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
-        }
-        // if(my_turn == false) {
-        //     pacer_wait();
-        // }
-        
-        // my_turn = true;
-    }
     /*Check to see if this board is first to initialise, then make it player 1*/
     bool isplayer1;
     isplayer1 = player1_check();
@@ -109,6 +94,24 @@ int main (void)
     //     while (1) {
     //     }
     // }
+
+    
+    //Starts Attack phase
+    bool do_attack_phase = true;
+    Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
+    Shot_t* shot_ptr = &new_shot;
+    bool my_turn = isplayer1;
+    while(do_attack_phase == true) {
+        for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
+            attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
+        }
+        // if(my_turn == false) {
+        //     pacer_wait();
+        // }
+        
+        // my_turn = true;
+    }
+    
 
     // bool do_attack_phase = true;
     // bool my_turn = isplayer1; 
@@ -141,14 +144,15 @@ int main (void)
 
     /*testing for new hit_ask and hit_tell functions*/
     // Shot_t new_shot = {.xcoord = 4, .ycoord = 4};
+    // Shot_t* newr_shot = &new_shot;
     // uint8_t shot_hit = 0;
     // if (isplayer1) {
-    //     shot_hit = hit_ask(&new_shot);
+    //     shot_hit = hit_ask(newr_shot);
     //     if (shot_hit == 20) {
-    //         led_set(LED1, 1);
-    //         while (1) {
+    //         // led_set(LED1, 1);
+    //         // while (1) {
 
-    //         }
+    //         // }
     //     }
     // } else {
     //     hit_tell(ship_board);

@@ -14,7 +14,7 @@ void sendchar(char ourchar);
 
 void sendnum(uint8_t number);
 
-uint8_t recievenum(void);
+int8_t recievenum(void);
 
 char recievechar(void);
 

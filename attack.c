@@ -132,19 +132,27 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
         navswitch_update();
         button_update();
         display_shots(shot_board);
+        bool sent = false;
         if(*my_turn == false) {
+            
+
+            sent = sendandconfirm(4);
             if(true) { // You hit the other player
-                indicate_hit();
+
+
+
+                // indicate_hit();
             }
             // send coords to player
             // led_set(LED1, 1);
         }
 
     } else if(*my_turn == false) {
-        current_ship->hits[1] = 1; //  mimicking a hit on ur ship 
         display_ship(current_ship);
         display_change();
-
+        int8_t coord = recieveandconfirm();
+        
+        
         //  have function that takes coords from other player
         //  have another function that tests these coords at board
         //  display board
