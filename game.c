@@ -27,7 +27,6 @@
 #include "../fonts/font5x7_1.h"
 
 //  Game Libraries
-#include "setup.h"
 #include "ship_mod.h"
 #include "led_testing.h"
 #include "set_up.h"
@@ -57,7 +56,6 @@ void initialisation(void)
 }
 
 
-
 int main (void)
 {
     initialisation();
@@ -67,7 +65,7 @@ int main (void)
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    //  Sets up board: NEEDS TO BE OPTIMIZED
+    //  Sets up boards
     uint8_t** board_info = board_maker();
     uint8_t** shot_board = shot_matrix();
 

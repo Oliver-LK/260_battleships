@@ -60,6 +60,16 @@ void display_shots(uint8_t** shot_board)
 
 }
 
+void indicate_hit(void) 
+{
+    for(uint8_t number = 0; number < NUM_FLASHES; number++) {
+        led_set(LED1, 0);
+        pacer_wait();
+        led_set(LED1, 1);
+        pacer_wait();
+    }
+}
+
 void shot_movement(Shot_t* current_shot)
 {
     if(navswitch_push_event_p(NAVSWITCH_SOUTH) && current_shot->ycoord < MAX_BOARD_HEIGHT - 1) {
@@ -114,13 +124,16 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
         button_update();
         display_shots(shot_board);
         if(*my_turn == false) {
+            if(true) {
+                indicate_hit();
+            }
             // send coords to player
             // call function to see if hit and display message
             // led_set(LED1, 1);
         }
 
     } else if(*my_turn == false) {
-        led_set(LED1, 1);
+        //led_set(LED1, 1);
         display_ship(current_ship);
         display_change();
 
