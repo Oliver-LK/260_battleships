@@ -85,7 +85,7 @@ uint8_t hit_ask(Shot_t* shot) {
     /*also note: a lot of magic numbers, will change later*/
 
     uint8_t confirmnum = 200;
-    while (confirmnum == 200) {
+    while (confirmnum != 1) {
         pacer_wait();
         sendnum(shot->xcoord);
         confirmnum = recievenum();
@@ -97,7 +97,7 @@ uint8_t hit_ask(Shot_t* shot) {
 
 
     confirmnum = 200;
-    while (confirmnum == 200) {
+    while (confirmnum != 1) {
         pacer_wait();
         sendnum(shot->ycoord);
         confirmnum = recievenum();
@@ -153,12 +153,13 @@ void hit_tell(uint8_t** board) {
             }
         }
     }
-    // if (xcoord == 1) {
-    //     led_set(LED1, 1);
-    //     while (1) {
+    if (xcoord == 1) {
+        led_set(LED1, 1);
+        while (1) {
 
-    //     }
-    // }
+        }
+    }
+    // led_set(LED1, 1);
     // while (1) {
 
     // }
@@ -184,15 +185,14 @@ void hit_tell(uint8_t** board) {
 
     // }
 
-    if (ycoord == 1) {
-        led_set(LED1, 1);
-        while (1) {
+    /*ALSO EQUALS 1 WHEN IT SHOULDNT??????*/
+    // if (ycoord == 1) {
+    //     led_set(LED1, 1);
+    //     while (1) {
 
-        }
-    }
-    while (1) {
+    //     }
+    // }
 
-    }
 
 
     uint8_t hit = 10;

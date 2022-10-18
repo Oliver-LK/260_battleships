@@ -78,10 +78,10 @@ int main (void)
 
     }
 
-    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-        test_ship_positions(ships[index_ship], false); //  bypass mode ON
-    }
+    // //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
+    // for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
+    //     test_ship_positions(ships[index_ship], false); //  bypass mode ON
+    // }
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
@@ -125,7 +125,7 @@ int main (void)
 
 
     /*testing for new hit_ask and hit_tell functions*/
-    Shot_t new_shot = {.xcoord = 4, .ycoord = 4, .num = 0};
+    Shot_t new_shot = {.xcoord = 4, .ycoord = 5, .num = 0};
     uint8_t shot_hit = 0;
     if (isplayer1) {
         shot_hit = hit_ask(&new_shot);
