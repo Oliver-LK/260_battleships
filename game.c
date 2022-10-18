@@ -51,37 +51,37 @@ void initialisation(void)
 
 int main (void)
 {
-    /*LED test*/
-    // led_set(LED1, 1);
-    // while (1) {
+    // /*LED test*/
+    // // led_set(LED1, 1);
+    // // while (1) {
 
-    // }
+    // // }
 
     initialisation();
-    greetings();
+    // greetings();
 
-    //  Sets up ship array
-    Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
-    Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
+    // //  Sets up ship array
+    // Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
+    // Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    //  Sets up board: NEEDS TO BE OPTIMIZED
-    uint8_t** board_info = board_maker();
-    uint8_t** shot_board = shot_matrix();
+    // //  Sets up board: NEEDS TO BE OPTIMIZED
+    // uint8_t** board_info = board_maker();
+    // uint8_t** shot_board = shot_matrix();
 
-    //  Starts the ship placement phase
-    uint8_t ship_index = 0;
-    bool do_place_phase = true;
-    while(do_place_phase == true) {
-        if(ship_index == TOTAL_SHIPS) {
-            do_place_phase = false;
+    // //  Starts the ship placement phase
+    // uint8_t ship_index = 0;
+    // bool do_place_phase = true;
+    // while(do_place_phase == true) {
+    //     if(ship_index == TOTAL_SHIPS) {
+    //         do_place_phase = false;
 
-        }
-        ship_placement_phase(ships[ship_index], &ship_index, board_info);
-        for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
-            display_ship(ships[index_ship]);
-        }
+    //     }
+    //     ship_placement_phase(ships[ship_index], &ship_index, board_info);
+    //     for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
+    //         display_ship(ships[index_ship]);
+    //     }
 
-    }
+    // }
 
     // //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
     // for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
@@ -90,32 +90,37 @@ int main (void)
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
-    // bool isplayer1;
-    // isplayer1 = player1_check();
-    // bool my_turn = isplayer1;
+    bool isplayer1;
+    isplayer1 = player1_check();
 
-    while (1) {
-        sendchar("a");
-    }
-    
-    char ourchar = "a";
-    char newchar = 'a';
-    while (1) {
-        tinygl_update();
-        newchar = recievechar();
-        if (newchar >= 33 && newchar <= 126) {
-            ourchar = newchar;
+    if (isplayer1) {
+        led_set(LED1, 1);
+        while (1) {
         }
-        char buffer[2];
-        buffer[0] = ourchar;
-        buffer[1] = '\0';
-        tinygl_text (buffer);
     }
+
+    
+    // while (1) {
+    //     sendchar("J");
+    // }
+    
+    // // sendchar('k');
+
+    // char newchar = 'a';
+    // while (1) {
+    //     pacer_wait();
+    //     if (ir_uart_read_ready_p()) {
+    //         newchar = ir_uart_getc();
+    //     }
+    //     if (newchar == 'k') {
+    //         led_set(LED1, 1);
+    //         // while (1) {
+
+    //         // }
+    //     }
+    // }
     
 
-    // if (isplayer1) {
-    //     led_set(LED1, 1);
-    //     while (1) {
 
     //     }
     // }
