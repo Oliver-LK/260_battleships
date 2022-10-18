@@ -79,8 +79,8 @@ int main (void)
     }
 
     //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-        test_ship_positions(ships[index_ship], false); //  bypass mode ON
+    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++) {
+        test_ship_positions(ships[index_ship], false); //  bypass mode = false
     }
 
     bool do_attack_phase = true;
@@ -88,30 +88,13 @@ int main (void)
     Shot_t* shot_ptr = &new_shot;
     bool my_turn = true;
     while(do_attack_phase == true) {
-          // This should be defined by IR communication
-        attack_phase(board_info, shot_board, shot_ptr, &my_turn);
+        for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
+            attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
+        }
+        
     }
 
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
-
-    //  This needs to be in a separate function
-    bool player1 = false;
-    char recieved;
-    if (ir_uart_read_ready_p()) {
-        recieved = ir_uart_getc();
-        ir_uart_putc('!');
-    } else {
-        bool player1 = true;
-        bool waitingforopp = true;
-        while (waitingforopp) {
-            ir_uart_putc('!');
-            if (ir_uart_read_ready_p()) {
-                recieved = ir_uart_getc();
-                waitingforopp = false;
-            }
-        }
-    }
-
-}   /*Large while loop for whole game*/
+}

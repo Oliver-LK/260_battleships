@@ -103,17 +103,27 @@ void take_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 
 
 
-void attack_phase(uint8_t** my_board_info, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
+void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
     if(*my_turn == true) {
         take_shot(shot_board, current_shot, my_turn);
         navswitch_update();
         button_update();
         display_shots(shot_board);
+        if(*my_turn == false) {
+            // send coords to player
+            // call function to see if hit and display message
+            led_set(LED1, 1);
+        }
 
     } else if(*my_turn == false) {
-        display_shots(shot_board);
         led_set(LED1, 1);
+        display_ship(current_ship);
+        display_change();
+
+        //  have function that takes coords from other player
+        //  have another function that tests these coords at board
+        //  display board
     }
 
 }
