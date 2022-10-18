@@ -25,6 +25,7 @@
 #include "ship_mod.h"
 #include "set_up.h"
 #include "attack.h"
+#include "irfuncs.h"
 
 uint8_t** shot_matrix(void) 
 {

@@ -45,6 +45,7 @@ void greetings(void)
         
     }
     display_clear();
+    display_update();
 }
 
 //  Creates a 7x5 board where ships will be stored

@@ -9,6 +9,7 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include "ship_mod.h"
 
 #define NUM_FLASHES 10
 #define FLASH_RATE 50
