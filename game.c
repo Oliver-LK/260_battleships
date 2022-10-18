@@ -90,16 +90,37 @@ int main (void)
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
-    bool isplayer1;
-    isplayer1 = player1_check();
+    // bool isplayer1;
+    // isplayer1 = player1_check();
     // bool my_turn = isplayer1;
 
-    if (isplayer1) {
-        led_set(LED1, 1);
-        while (1) {
-
-        }
+    while (1) {
+        sendchar("a");
     }
+    
+    char ourchar = "a";
+    char newchar = 'a';
+    while (1) {
+        tinygl_update();
+        newchar = recievechar();
+        if (newchar >= 33 && newchar <= 126) {
+            ourchar = newchar;
+        }
+        char buffer[2];
+        buffer[0] = ourchar;
+        buffer[1] = '\0';
+        tinygl_text (buffer);
+    }
+    
+
+    // if (isplayer1) {
+    //     led_set(LED1, 1);
+    //     while (1) {
+
+    //     }
+    // }
+
+
 }
 //     bool do_attack_phase = true;
 //     Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};

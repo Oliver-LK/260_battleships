@@ -7,16 +7,16 @@
 #include "led.h"
 #include "pacer.h"
 
-bool is_char_recieved(char deschar) {
-    bool answer = false;
+void sendchar(char ourchar) {
+    ir_uart_putc(ourchar);
+}
+
+char recievechar(void) {
     char recievedchar;
     if (ir_uart_read_ready_p()) {
         recievedchar = ir_uart_getc();
     }
-    if (recievedchar == deschar) {
-        answer = true;
-    }
-    return answer;
+    return recievedchar;
 }
 
 bool player1_check(void) {

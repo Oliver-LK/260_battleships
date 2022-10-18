@@ -8,6 +8,10 @@
 #include "pio.h"
 #include "led.h"
 
+void sendchar(char ourchar);
+
+char recievechar(void);
+
 bool player1_check(void);
 
 #endif
