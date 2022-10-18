@@ -49,9 +49,13 @@ void initialisation(void)
 }
 
 
-
 int main (void)
 {
+    /*LED test*/
+    // led_set(LED1, 1);
+    // while (1) {
+
+    // }
 
     initialisation();
     greetings();
@@ -79,18 +83,18 @@ int main (void)
 
     }
 
-    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-        test_ship_positions(ships[index_ship], false); //  bypass mode ON
-    }
+    // //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
+    // for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
+    //     test_ship_positions(ships[index_ship], false); //  bypass mode ON
+    // }
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
-    bool player1 = player1_check();
-    bool my_turn = player1;
+    bool isplayer1;
+    isplayer1 = player1_check();
+    // bool my_turn = isplayer1;
 
-    /*Player1 check test*/
-    if (player1) {
+    if (isplayer1) {
         led_set(LED1, 1);
         while (1) {
 
