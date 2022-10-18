@@ -42,6 +42,7 @@ void greetings(void)
         
     }
     display_clear();
+    display_update();
 }
 
 uint8_t** board_maker(void) 

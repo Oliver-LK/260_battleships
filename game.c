@@ -26,6 +26,7 @@
 #include "set_up.h"
 #include "test_case.h"
 #include "attack.h"
+#include "irfuncs.h"
 
 #define PACER_FREQ 500
 
@@ -51,99 +52,91 @@ void initialisation(void)
 
 int main (void)
 {
-    // /*LED test*/
-    // // led_set(LED1, 1);
-    // // while (1) {
-
-    // // }
-
     initialisation();
-    // greetings();
+    greetings();
 
-    // //  Sets up ship array
-    // Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
-    // Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
+    //  Sets up ship array
+    Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
+    Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    // //  Sets up board: NEEDS TO BE OPTIMIZED
-    // uint8_t** board_info = board_maker();
+    //  Sets up board: NEEDS TO BE OPTIMIZED
+    uint8_t** board_info = board_maker();
     // uint8_t** shot_board = shot_matrix();
 
-    // //  Starts the ship placement phase
-    // uint8_t ship_index = 0;
-    // bool do_place_phase = true;
-    // while(do_place_phase == true) {
-    //     if(ship_index == TOTAL_SHIPS) {
-    //         do_place_phase = false;
+    //  Starts the ship placement phase
+    uint8_t ship_index = 0;
+    bool do_place_phase = true;
+    while(do_place_phase == true) {
+        if(ship_index == TOTAL_SHIPS) {
+            do_place_phase = false;
 
-    //     }
-    //     ship_placement_phase(ships[ship_index], &ship_index, board_info);
-    //     for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
-    //         display_ship(ships[index_ship]);
-    //     }
+        }
+        ship_placement_phase(ships[ship_index], &ship_index, board_info);
+        for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
+            display_ship(ships[index_ship]);
+        }
 
-    // }
+    }
 
-    // //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    // for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
-    //     test_ship_positions(ships[index_ship], false); //  bypass mode ON
-    // }
+    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
+    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++){
+        test_ship_positions(ships[index_ship], false); //  bypass mode ON
+    }
 
 
     /*Check to see if this board is first to initialise, then make it player 1*/
     bool isplayer1;
     isplayer1 = player1_check();
 
+    /*Test for player1 function*/
+    // if (isplayer1) {
+    //     led_set(LED1, 1);
+    //     while (1) {
+    //     }
+    // }
+
+    // bool do_attack_phase = true;
+    // bool my_turn = isplayer1; 
+    // Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
+    // Shot_t* shot_ptr = &new_shot;
+    // while (do_attack_phase) {
+    //     attack_phase(board_info, shot_board, shot_ptr,  my_turn);
+    // }
+
+
+    /*testing for send and recieve num functions*/
+    /*WORKING*/
+    // uint8_t rnum = 0;
+    // if (isplayer1) {
+    //     while (1) {
+    //         pacer_wait();
+    //         sendnum(4);
+    //     }
+    // } else {
+    //     while (rnum != 4) {
+    //         pacer_wait();
+    //         rnum = recievenum();
+    //     }
+    //     led_set(LED1, 1);
+    //     while (1) {
+    //     }
+    // }
+
+
+
+    /*testing for new hit_ask and hit_tell functions*/
+    Shot_t new_shot = {.xcoord = 4, .ycoord = 4, .num = 0};
+    uint8_t shot_hit = 0;
     if (isplayer1) {
-        led_set(LED1, 1);
-        while (1) {
+        shot_hit = hit_ask(&new_shot);
+        if (shot_hit == 20) {
+            led_set(LED1, 1);
+            while (1) {
+
+            }
         }
+    } else {
+        hit_tell(board_info);
     }
 
-    
-    // while (1) {
-    //     sendchar("J");
-    // }
-    
-    // // sendchar('k');
-
-    // char newchar = 'a';
-    // while (1) {
-    //     pacer_wait();
-    //     if (ir_uart_read_ready_p()) {
-    //         newchar = ir_uart_getc();
-    //     }
-    //     if (newchar == 'k') {
-    //         led_set(LED1, 1);
-    //         // while (1) {
-
-    //         // }
-    //     }
-    // }
-    
-
-
-    //     }
-    // }
-
-
 }
-//     bool do_attack_phase = true;
-//     Shot_t new_shot = {.xcoord = 0, .ycoord = 0, .num = 0};
-//     Shot_t* shot_ptr = &new_shot;
-//     while(do_attack_phase == true) {
-//         attack_phase(board_info, shot_board, shot_ptr,  my_turn);
-//     }
-
-
-
-//     /*Start of while loop for game*/
-//     bool game_over = false;
-
-//     /*Large while loop for whole game*/
-//     while (!game_over) {
-//         if (player1) {
-            
-//         }
-
-//     }
-// }

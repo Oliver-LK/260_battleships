@@ -24,6 +24,7 @@ uint8_t take_shot(uint8_t** shot_board, Shot_t* current_shot);
 void attack_phase(uint8_t** board_info, uint8_t** shot_board, Shot_t* current_shot, bool my_turn);
 
 void display_shots(uint8_t** shot_board);
+void display_change(void);
 
 
 
