@@ -73,7 +73,7 @@ bool sendandconfirm(uint8_t number) {
 int8_t recieveandconfirm() {
     int8_t recnum = recievenum();
     if (recnum != -1) {
-        sendnum(1);
+        sendnum(10);
     }
     return recnum;
 }

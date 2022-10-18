@@ -134,9 +134,10 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
         display_shots(shot_board);
         bool sent = false;
         if(*my_turn == false) {
-            
+            int8_t encodedcoords = (10 * current_shot->xcoord) + current_shot->ycoord;
+            sent = sendandconfirm(encodedcoords);
 
-            sent = sendandconfirm(4);
+
             if(true) { // You hit the other player
 
 
@@ -150,7 +151,16 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
     } else if(*my_turn == false) {
         display_ship(current_ship);
         display_change();
-        int8_t coord = recieveandconfirm();
+        int8_t coords_to_decode = -1;
+        coords_to_decode = recieveandconfirm();
+
+        if (coords_to_decode != -1 && coords_to_decode != 10) {
+            int8_t ycoord = coords_to_decode % 10;
+            int8_t xcoord = (coords_to_decode - ycoord) / 10;
+            if (xcoord == 2) {
+                led_set(LED1, 1);
+            }
+        }
         
         
         //  have function that takes coords from other player
