@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #define NUM_FLASHES 10
+#define FLASH_RATE 50
 
 typedef struct
 {
@@ -20,8 +21,8 @@ typedef struct
 
 uint8_t** shot_matrix(void);
 
-void display_change();
-
+void display_change(void);
+void wait(void);
 void display_current_shot(Shot_t* current_shot);
 void display_shots(uint8_t** shot_board);
 void indicate_hit(void); 

@@ -60,13 +60,21 @@ void display_shots(uint8_t** shot_board)
 
 }
 
+void wait(void)
+{
+    for(uint8_t index = 0; index < FLASH_RATE; index++) {
+        pacer_wait();
+    }
+}
+
 void indicate_hit(void) 
 {
+    led_set(LED1, 0);
     for(uint8_t number = 0; number < NUM_FLASHES; number++) {
-        led_set(LED1, 0);
-        pacer_wait();
         led_set(LED1, 1);
-        pacer_wait();
+        wait();
+        led_set(LED1, 0);
+        wait();
     }
 }
 
@@ -124,16 +132,15 @@ void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_sh
         button_update();
         display_shots(shot_board);
         if(*my_turn == false) {
-            if(true) {
+            if(true) { // You hit the other player
                 indicate_hit();
             }
             // send coords to player
-            // call function to see if hit and display message
             // led_set(LED1, 1);
         }
 
     } else if(*my_turn == false) {
-        //led_set(LED1, 1);
+        current_ship->hits[1] = 1;
         display_ship(current_ship);
         display_change();
 

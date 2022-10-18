@@ -14,13 +14,13 @@
 
 #include "ship_mod.h"
 
-#define PACER_FREQ 1000
+#define PACER_FREQ 500
 #define MESSAGE_RATE 25
 #define MAX_BOARD_HEIGHT 7
 #define MAX_BOARD_WIDTH 5
 
 void greetings(void);
-uint8_t** board_maker(void);
+uint8_t** ship_board_maker(void);
 void translation(Ship_t* current_ship);
 void rotation(Ship_t* current_ship);
 void placement(Ship_t* current_ship, uint8_t* ship_index, uint8_t** board_info);

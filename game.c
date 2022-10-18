@@ -33,9 +33,8 @@
 #include "test_case.h"
 #include "attack.h"
 
-#define PACER_FREQ 500
 
-/* Initialisation section*/
+/*  Initialisation section*/
 void initialisation(void) 
 { 
     display_init();
@@ -55,7 +54,9 @@ void initialisation(void)
     display_clear();
 }
 
-
+/*  This the the schedular which schedules all events and also declares any variables that will
+    are used throughout most sections of the program. This includes the position of the ships
+    for example */
 int main (void)
 {
     initialisation();
@@ -65,8 +66,8 @@ int main (void)
     Ship_t ships_to_place[] = {battle_ship_init(), destroyer1_init(), destroyer2_init(), patrol_boat_init()};
     Ship_t* ships[TOTAL_SHIPS * sizeof(Ship_t)] = {&ships_to_place[0], &ships_to_place[1], &ships_to_place[2], &ships_to_place[3]};
     
-    //  Sets up boards
-    uint8_t** board_info = board_maker();
+    //  Sets up boards 
+    uint8_t** ship_board = ship_board_maker();
     uint8_t** shot_board = shot_matrix();
 
     //  Starts the ship placement phase
@@ -75,20 +76,14 @@ int main (void)
     while(do_place_phase == true) {
         if(ship_index == TOTAL_SHIPS) {
             do_place_phase = false;
-
         }
-        ship_placement_phase(ships[ship_index], &ship_index, board_info);
+        ship_placement_phase(ships[ship_index], &ship_index, ship_board);
         for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
             display_ship(ships[index_ship]);
         }
-
     }
 
-    //  TEST CASE: testing to see if ships are all there: Can be deleted when not needed
-    for(uint64_t index_ship = 0; index_ship <= TOTAL_SHIPS; index_ship++) {
-        test_ship_positions(ships[index_ship], false); //  bypass mode = false
-    }
-
+    //  Starts Attack phase
     bool do_attack_phase = true;
     Shot_t new_shot = {.xcoord = 0, .ycoord = 0};
     Shot_t* shot_ptr = &new_shot;
@@ -103,8 +98,4 @@ int main (void)
         
         // my_turn = true;
     }
-
-
-
-    /*Check to see if this board is first to initialise, then make it player 1*/
 }
