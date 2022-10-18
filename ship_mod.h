@@ -9,18 +9,11 @@
 
 
 typedef struct {
-    bool hit1;
-    bool hit2;
-    bool hit3;
-    bool hit4;
-} Hits_t;
-
-typedef struct {
     uint8_t length;
     uint8_t xcoord;
     uint8_t ycoord;
     bool vertical;
-    Hits_t hits;
+    uint8_t hits[TOTAL_SHIPS * sizeof(uint8_t)];
     
 } Ship_t;
 

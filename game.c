@@ -1,5 +1,7 @@
 //  To delete all .o files
 //  find . -type f -name '*.o' -delete
+//  find . -type f -name '*.out' -delete
+//  find . -type f -name '*.hex' -delete
 //  C Libraries
 #include <stdint.h>
 #include <stdbool.h>
