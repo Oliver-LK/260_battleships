@@ -1,3 +1,8 @@
+/*  File:   game.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  Main game file. Includes initiations and game schedular */
+
 //  To delete all .o files
 //  find . -type f -name '*.o' -delete
 //  find . -type f -name '*.out' -delete
@@ -94,11 +99,11 @@ int main (void)
         for(uint8_t ship_indexer = 0; ship_indexer < TOTAL_SHIPS; ship_indexer++) {
             attack_phase(ships[ship_indexer], shot_board, shot_ptr, &my_turn);
         }
-        if(my_turn == false) {
-            timer_wait(100000);
-        }
+        // if(my_turn == false) {
+        //     pacer_wait();
+        // }
         
-        my_turn = true;
+        // my_turn = true;
     }
 
 

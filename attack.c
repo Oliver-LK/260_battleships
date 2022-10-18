@@ -1,4 +1,8 @@
-/*  This is the attack phase where each player will be able to attack the other player */
+/*  File:   attack.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains all the functions related to the attack phase of the game.
+            Includes selecting where you want to shoot and incidates if hit or miss.
 
 //  C Libraries
 #include <stdint.h>

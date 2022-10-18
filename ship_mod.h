@@ -1,3 +1,5 @@
+/*  Ship module including all ship specific functions*/
+
 #ifndef SHIP_MOD_H
 #define SHIP_MOD_H
 

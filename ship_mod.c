@@ -42,7 +42,7 @@ Ship_t destroyer1_init(void) {
         .ycoord = 0,
         .length = 3,
         .vertical = true,
-        .hits = {0, 0, 0, 0}
+        .hits = {0, 0, 0}
     };
     return destroyer1;
 }
@@ -53,7 +53,7 @@ Ship_t destroyer2_init(void) {
         .ycoord = 0,
         .length = 3,
         .vertical = true,
-        .hits = {0, 0, 0, 0}
+        .hits = {0, 0, 0}
     };
     return destroyer2;
 }
@@ -64,7 +64,7 @@ Ship_t patrol_boat_init(void) {
         .ycoord = 0,
         .length = 2,
         .vertical = true,
-        .hits = {0, 0, 0, 0}
+        .hits = {0, 0}
     };
     return patrol_boat;
 }

@@ -1,6 +1,9 @@
-/*  This module contains all the functions related to the set up phase which involves ship placement.
-    This infomation is alters the each Ship_t object hence the pointers.
-    A 7x5 matrix is also created which represents the board. 1 represent where a ship is present */
+/*  File:   set_up.c
+    Author: Michael Rivers and Oliver Clements
+    Date:   19 Oct 2022
+    Descr:  This module contains all the functions related to the set up phase which involves ship placement.
+            This infomation is alters the each Ship_t object hence the pointers.
+            A 7x5 matrix is also created which represents the board. 1 represent where a ship is present */
 
 //  C Libraries
 #include <stdint.h>
