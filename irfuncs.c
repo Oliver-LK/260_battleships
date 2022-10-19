@@ -26,14 +26,14 @@ void sendchar(char ourchar) {
 }
 
 /*Equivalent to above function, but takes a uint8_t number and is easier to read in main code*/
-void sendnum(uint8_t number) {
-
+void sendnum(uint8_t number)
+{
     ir_uart_putc(number);
 }
 
 /*Checks for IR transmission, then returns the number if there is a transmission, -1 if not*/
-int8_t recievenum(void) {
-
+int8_t recievenum(void)
+{
     int8_t recievednum = -1;
 
     if (ir_uart_read_ready_p()) 
@@ -45,8 +45,8 @@ int8_t recievenum(void) {
 }
 
 /*Same as above but for characters*/
-char recievechar(void) {
-
+char recievechar(void)
+{
     char recievedchar = -1;
 
     if (ir_uart_read_ready_p()) {
@@ -58,8 +58,8 @@ char recievechar(void) {
 }
 
 /*Makes the first player to arrive at the function player 1, then waits for the second player to arrive setting them to player 2*/
-bool player1_check(void) {
-
+bool player1_check(void)
+{
     bool isplayer1 = false;
     char newchar = 0;
     uint8_t counter = 0;

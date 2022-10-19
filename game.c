@@ -75,6 +75,7 @@ int main (void)
     /*Starts the ship placement phase*/
     uint8_t ship_index = 0;
     bool do_place_phase = true;
+    
     while(do_place_phase == true) {
 
         if(ship_index == TOTAL_SHIPS) {

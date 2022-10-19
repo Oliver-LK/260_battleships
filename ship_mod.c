@@ -31,7 +31,8 @@ void display_ship(Ship_t* ship)
     
 }
 
-void display_matrix(uint8_t** ship_board) {
+void display_matrix(uint8_t** ship_board)
+{
     for (size_t y = 0; y < MAX_BOARD_HEIGHT; y++) {
         for (size_t x = 0; x < MAX_BOARD_WIDTH; x++) {
             if (ship_board[y][x] == 1) {
@@ -41,7 +42,8 @@ void display_matrix(uint8_t** ship_board) {
     }
 }
 
-Ship_t battle_ship_init(void) {
+Ship_t battle_ship_init(void)
+{
     Ship_t battle_ship = {
         .xcoord = 0,
         .ycoord = 0,
@@ -52,7 +54,8 @@ Ship_t battle_ship_init(void) {
     return battle_ship;
 }
 
-Ship_t destroyer1_init(void) {
+Ship_t destroyer1_init(void)
+{
     Ship_t destroyer1 = {
         .xcoord = 0,
         .ycoord = 0,
@@ -63,7 +66,8 @@ Ship_t destroyer1_init(void) {
     return destroyer1;
 }
 
-Ship_t destroyer2_init(void) {
+Ship_t destroyer2_init(void)
+{
     Ship_t destroyer2 = {
         .xcoord = 0,
         .ycoord = 0,
@@ -74,7 +78,8 @@ Ship_t destroyer2_init(void) {
     return destroyer2;
 }
 
-Ship_t patrol_boat_init(void) {
+Ship_t patrol_boat_init(void)
+{
     Ship_t patrol_boat = {
         .xcoord = 0,
         .ycoord = 0,
