@@ -13,6 +13,7 @@
 
 #define NUM_FLASHES 10
 #define FLASH_RATE 50
+#define SEND 4
 
 typedef struct
 {

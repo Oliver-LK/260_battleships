@@ -28,5 +28,6 @@ Ship_t destroyer2_init(void);
 Ship_t patrol_boat_init(void);
 
 void display_ship(Ship_t* ship);
+void display_matrix(uint8_t** ship_board);
 
 #endif
