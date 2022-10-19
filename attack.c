@@ -101,7 +101,7 @@ void shot_movement(Shot_t* current_shot)
 
 bool test_shot(uint8_t** shot_board, Shot_t* current_shot)
 {
-    if(button_push_event_p(0) && shot_board[current_shot->ycoord][current_shot->xcoord] == 1) {
+    if(button_push_event_p(0) && shot_board[current_shot->ycoord][current_shot->xcoord]) {
         return false;
     } else {
         return true;
@@ -110,7 +110,7 @@ bool test_shot(uint8_t** shot_board, Shot_t* current_shot)
 
 void select_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 {
-    if((button_push_event_p(0)) && test_shot(shot_board, current_shot) == true) {
+    if((button_push_event_p(0)) && test_shot(shot_board, current_shot)) {
         shot_board[current_shot->ycoord][current_shot->xcoord] = 1;
         *my_turn = false; 
     }
@@ -125,47 +125,46 @@ void take_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
 
 
 
-void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn)
+void attack_phase(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn, uint8_t** ship_board)
 {
     if(*my_turn == true) {
         take_shot(shot_board, current_shot, my_turn);
         navswitch_update();
         button_update();
-        display_shots(shot_board);
-        bool sent = false;
+        display_shots(shot_board);;
         if(*my_turn == false) {
-            int8_t encodedcoords = (10 * current_shot->xcoord) + current_shot->ycoord;
-            sent = sendandconfirm(encodedcoords);
+            // int8_t encodedcoords = (10 * current_shot->xcoord) + current_shot->ycoord;
+            sendnum(4);
+            // int8_t shot_hit = recievenum();
 
-
-            if(true) { // You hit the other player
-
-
-
-                // indicate_hit();
-            }
-            // send coords to player
-            // led_set(LED1, 1);
+            // if(shot_hit == 1) { // You hit the other player
+            //     indicate_hit();
+            // }
         }
 
     } else if(*my_turn == false) {
-        display_ship(current_ship);
+        display_matrix(ship_board);
         display_change();
         int8_t coords_to_decode = -1;
-        coords_to_decode = recieveandconfirm();
-
-        if (coords_to_decode != -1 && coords_to_decode != 10) {
-            int8_t ycoord = coords_to_decode % 10;
-            int8_t xcoord = (coords_to_decode - ycoord) / 10;
-            if (xcoord == 2) {
-                led_set(LED1, 1);
-            }
+        coords_to_decode = recievenum();
+        if (coords_to_decode == 4) {
+            *my_turn = true;
         }
-        
-        
-        //  have function that takes coords from other player
-        //  have another function that tests these coords at board
-        //  display board
+
+
+        /*This loop is entering when it should not be, due to recievenum() recieving unwanted data*/
+        // if (coords_to_decode >= 0 && coords_to_decode <= 50) {
+        //     int8_t ycoord = coords_to_decode % 10;
+        //     int8_t xcoord = (coords_to_decode - ycoord) / 10;
+        //     if (ship_board[ycoord][xcoord] == 1) {
+        //         // ship_board[ycoord][xcoord] = 0;
+        //         // led_set(LED1, 1);
+        //         sendnum(1);
+        //     } else {
+        //         sendnum(0);
+        //     }
+        //     *my_turn = true;
+        // }
     }
 
 }

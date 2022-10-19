@@ -31,7 +31,7 @@ void shot_movement(Shot_t* current_shot);
 bool test_shot(uint8_t** shot_board, Shot_t* current_shot);
 void select_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
 void take_shot(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
-void attack_phase(Ship_t* current_ship, uint8_t** shot_board, Shot_t* current_shot, bool* my_turn);
+void attack_phase(uint8_t** shot_board, Shot_t* current_shot, bool* my_turn, uint8_t** ship_board);
 
 
 #endif
