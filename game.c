@@ -29,7 +29,6 @@
 
 //  Game Libraries
 #include "ship_mod.h"
-#include "led_testing.h"
 #include "set_up.h"
 #include "test_case.h"
 #include "attack.h"
@@ -56,7 +55,7 @@ void initialisation(void)
     display_clear();
 }
 
-/*  This the the schedular which schedules all events and also declares any variables that will
+/*  This the the scheduler which schedules all events and also declares any variables that will
     are used throughout most sections of the program. This includes the position of the ships
     for example */
 int main (void)
@@ -75,17 +74,17 @@ int main (void)
     /*Starts the ship placement phase*/
     uint8_t ship_index = 0;
     bool do_place_phase = true;
-    
-    while(do_place_phase == true) {
 
-        if(ship_index == TOTAL_SHIPS) {
+    while (do_place_phase == true) {
+
+        if (ship_index == TOTAL_SHIPS) {
             do_place_phase = false;
         }
 
         ship_placement_phase(ships[ship_index], &ship_index, ship_board);
 
         /*Only displays ships that have been initialised*/
-        for(uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
+        for (uint64_t index_ship = 0; index_ship <= ship_index; index_ship++){
 
             display_ship(ships[index_ship]);
         }
@@ -102,7 +101,7 @@ int main (void)
     bool my_turn = isplayer1;
 
     /*Start attack phase*/
-    while(do_attack_phase == true) {
+    while (do_attack_phase == true) {
 
         pacer_wait();
         attack_phase(shot_board, shot_ptr, &my_turn, ship_board);

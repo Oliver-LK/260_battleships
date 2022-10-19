@@ -12,7 +12,6 @@
 
 #define TOTAL_SHIPS 4
 
-
 typedef struct {
     uint8_t length;
     uint8_t xcoord;

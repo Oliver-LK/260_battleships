@@ -23,8 +23,6 @@
 //  Game Libraries
 #include "ship_mod.h"
 
-
-
 void test_ship_positions(Ship_t* current_ship, bool test)
 {
     while(test == true) {
@@ -34,9 +32,4 @@ void test_ship_positions(Ship_t* current_ship, bool test)
             display_update();
         }
     }
-}
-
-void opponent_test_board(void)
-{
-    
 }

@@ -21,10 +21,14 @@
 
 void display_ship(Ship_t* ship)
 {
-    for(uint8_t ship_index = 0; ship_index < ship->length; ship_index++) {
-        if(ship->vertical == true && ship->hits[ship_index] == 0) {
+    for (uint8_t ship_index = 0; ship_index < ship->length; ship_index++) {
+
+        if (ship->vertical == true && ship->hits[ship_index] == 0) {
+
             display_pixel_set(ship->xcoord, ship->ycoord + ship_index, true);
-        } else if(ship->vertical == false && ship->hits[ship_index] == 0) {
+
+        } else if (ship->vertical == false && ship->hits[ship_index] == 0) {
+
             display_pixel_set(ship->xcoord + ship_index, ship->ycoord, true);
         }
     }
@@ -34,8 +38,11 @@ void display_ship(Ship_t* ship)
 void display_matrix(uint8_t** ship_board)
 {
     for (size_t y = 0; y < MAX_BOARD_HEIGHT; y++) {
+
         for (size_t x = 0; x < MAX_BOARD_WIDTH; x++) {
+
             if (ship_board[y][x] == 1) {
+
                 display_pixel_set(x, y, true);
             }
         }

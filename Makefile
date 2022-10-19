@@ -52,8 +52,6 @@ ship_mod.o: ship_mod.c ship_mod.h ../../drivers/avr/system.h
 attack.o: attack.c attack.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-led_testing.o: led_testing.c led_testing.h ../../drivers/avr/system.h
-	$(CC) -c $(CFLAGS) $< -o $@
 
 timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -81,7 +79,7 @@ irfuncs.o: irfuncs.c irfuncs.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o display.o led.o set_up.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o ship_mod.o attack.o test_case.o led_testing.o timer.o timer0.o button.o usart1.o font.o prescale.o ir_uart.o irfuncs.o
+game.out: game.o system.o display.o led.o set_up.o ledmat.o navswitch.o pacer.o ir_uart.o tinygl.o pio.o ship_mod.o attack.o test_case.o timer.o timer0.o button.o usart1.o font.o prescale.o ir_uart.o irfuncs.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

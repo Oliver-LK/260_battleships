@@ -9,6 +9,7 @@
 #include <stdbool.h>
 
 #include "ship_mod.h"
+
 void test_ship_positions(Ship_t* current_ship, bool test);
 
 #endif
